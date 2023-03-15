@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!--<PackageReference Include="EntityFramework" Version="6.4.4" />-->
+		<PackageReference Include="EPPlus" Version="4.5.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
+		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="EASendMail" Version="7.8.0.1" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+		<PackageReference Include="System.IO.Ports" Version="7.0.0" />
+		<PackageReference Include="System.Management" Version="7.0.0" />
+		<PackageReference Include="System.ServiceModel.Duplex" Version="4.6.*" />
+		<PackageReference Include="System.ServiceModel.Http" Version="4.6.*" />
+		<PackageReference Include="System.ServiceModel.NetTcp" Version="4.6.*" />
+		<PackageReference Include="System.ServiceModel.Security" Version="4.6.*" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="GSMCommShared">
+		  <HintPath>GSMCommShared.dll</HintPath>
+		</Reference>
+		<Reference Include="GSMCommunication">
+		  <HintPath>GSMCommunication.dll</HintPath>
+		</Reference>
+		<Reference Include="PDUConverter">
+		  <HintPath>PDUConverter.dll</HintPath>
+		</Reference>
+		<Reference Include="SMS_LIB">
+			<HintPath>SMS_LIB.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+</Project>

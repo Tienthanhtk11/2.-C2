@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\SMS Services\SMS_Services\SMS_Services\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-03-06T19:42:59.8386387Z;False|2023-03-07T02:42:43.8278740+07:00;True|2023-03-07T02:40:36.5208364+07:00;True|2023-03-05T22:50:54.1836016+07:00;True|2023-03-04T12:15:00.8109137+07:00;True|2023-03-04T12:04:00.7463008+07:00;True|2023-03-04T11:05:07.3653341+07:00;True|2023-03-04T11:01:11.8496441+07:00;True|2023-03-04T10:57:22.3290455+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

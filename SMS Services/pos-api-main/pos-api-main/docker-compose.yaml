@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+ pos-point-of-sale:
+    environment:
+      - ConnectionStrings:DefaultConnection=${POS_CONNECTION_STRING}
+    container_name: pos-point-of-sale
+    image: smartgapjsc/pos-point-of-sale:tag
+    networks:
+      - smartgapjsc-pos-network
+    ports:
+      - target: 80
+        published: 8211
+    labels:
+      service: pos-point-of-sale
+      env: ${ENVIRONMENT}
+      project: pos
+networks:
+  smartgapjsc-pos-network:
+    driver: bridge
