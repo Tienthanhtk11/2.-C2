@@ -80,22 +80,23 @@ namespace SMS_Services.Repository
         public void check_port()
         {
             List<Port> list_port = new();
-            for (int i = 1; i < 50; i++)
+            for (int i = 1; i < 100; i++)
             {
-                try
+                try 
                 {
                     SerialPort serialPort = new();
                     Console.WriteLine("COM" + i);
                     serialPort = extractSMS.OpenPort("COM" + i, Convert.ToInt32(115200), Convert.ToInt32(8), Convert.ToInt32(100), Convert.ToInt32(100));
                     //+COPS: 0,0,"Mobifone"
-
                     string network = extractSMS.GetSimNetWork(serialPort);
+                    Console.WriteLine(network);
                     Port port = new()
                     {
                         name = "COM" + i,
                         telco = "network",
                     };
                     string raw_info = extractSMS.CheckMoney(serialPort);
+                    Console.WriteLine(raw_info);
                     if (raw_info != null && raw_info != "")
                     {
                         Regex phone_number_rule = new(@"(0|84)\d{9}");
@@ -113,13 +114,15 @@ namespace SMS_Services.Repository
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    extractSMS.ClosePort(serialPort);
                 }
+
             }
-            List<Port> list_port_db = _context.Port.Where(x => !x.is_delete).ToList();
-            list_port_db.ForEach(x => x.is_delete = true);
-            _context.Port.UpdateRange(list_port_db);
-            _context.Port.AddRange(list_port);
-            _context.SaveChanges();
+            //List<Port> list_port_db = _context.Port.Where(x => !x.is_delete).ToList();
+            //list_port_db.ForEach(x => x.is_delete = true);
+            //_context.Port.UpdateRange(list_port_db);
+            //_context.Port.AddRange(list_port);
+            //_context.SaveChanges();
         }
         public async void SendSMSDirect(string phone_number, string message)
         {

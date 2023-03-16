@@ -315,17 +315,17 @@ namespace SMS_Services.Common
         public string CheckMoney(SerialPort port)
         {
             //dùng command để lấy số dư tài khoản
-            //string command = "AT + COPS =? ";
+            //string command2 = "AT + COPS =? ";
+            //string recievedData2 = ExecCommand(port, command2, 5000, "Failed to send message"); //3 seconds
+            Thread.Sleep(1000);
             string command = "AT+CUSD=1,\"*101#\",15";
             string recievedData = ExecCommand(port, command, 5000, "Failed to send message"); //3 seconds
-            Console.WriteLine(recievedData);
             return recievedData;
         }
         public string GetSimNetWork(SerialPort port)
         {
             string command2 = "AT+COPS?";
             string recievedData = ExecCommand(port, command2, 5000, "Failed to send message"); //3 seconds
-            Console.WriteLine(recievedData);
             if (recievedData.Contains("VINAPHONE"))
             {
                 return "Vinaphone";

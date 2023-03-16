@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHostedService<SendSMS_Cronjob_Services>();
+//builder.Services.AddHostedService<SendSMS_Cronjob_Services>();
 //builder.Services.AddHostedService<ReadSMS_Cronjob_Services>();
 
 string issuer = builder.Configuration["TokenSettings:Issuer"].ToString();
