@@ -1,14 +1,22 @@
+SMS Services/SMS_Services/SMS_Services/obj/*
+SMS Services/SMS_Services/SMS_Services/bin/*
 
-SMS Services/SMS_Services/SMS_Services/obj/Debug/net6.0/refint/SMS_Services.dll
-SMS Services/SMS_Services/SMS_Services/obj/Debug/net6.0/ref/SMS_Services.dll
-SMS Services/SMS_Services/SMS_Services/obj/Debug/net6.0/SMS_Services.dll
-SMS Services/SMS_Services/SMS_Services/obj/Debug/net6.0/SMS_Services.pdb
-*.v2
-SMS Services/SMS_Services/.vs/SMS_Services/v17/.futdcache.v2
-SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/e8d77d7c-ef82-4a85-8bf2-085cc40afa50.vsidx
 SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/e4e1e4e7-24d2-4d4a-8eab-b17644bd73d9.vsidx
-SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/9fdcafee-4670-40cc-8442-b274d65dbd22.vsidx
-SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/813a260b-2d05-426f-84d9-d384f0360c6d.vsidx
-SMS Services/SMS_Services/.vs/SMS_Services/v17/.futdcache.v2
-SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/9fdcafee-4670-40cc-8442-b274d65dbd22.vsidx
-SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/813a260b-2d05-426f-84d9-d384f0360c6d.vsidx
+SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/e8d77d7c-ef82-4a85-8bf2-085cc40afa50.vsidx
+SMS_APP/.vs/SMS_APP/FileContentIndex/6d4f30e1-fae7-48b3-a0d2-284f3f5359bb.vsidx
+SMS_APP/.vs/SMS_APP/FileContentIndex/9daab029-27ab-4192-8aab-669974d2d491.vsidx
+SMS_APP/.vs/SMS_APP/FileContentIndex/read.lock
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.AssemblyInfo.cs
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.AssemblyInfoInputs.cache
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.assets.cache
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.csproj.AssemblyReference.cache
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.designer.deps.json
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.designer.runtimeconfig.json
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.GeneratedMSBuildEditorConfig.editorconfig
+SMS_APP/SMS_APP/obj/Debug/net6.0-windows/SMS_APP.GlobalUsings.g.cs
+SMS_APP/SMS_APP/obj/project.assets.json
+SMS_APP/SMS_APP/obj/project.nuget.cache
+SMS_APP/SMS_APP/obj/SMS_APP.csproj.nuget.dgspec.json
+SMS_APP/SMS_APP/obj/SMS_APP.csproj.nuget.g.props
+SMS_APP/SMS_APP/obj/SMS_APP.csproj.nuget.g.targets
