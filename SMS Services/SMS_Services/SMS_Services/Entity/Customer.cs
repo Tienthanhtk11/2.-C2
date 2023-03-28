@@ -9,5 +9,8 @@
         public string email { get; set; } = "";
         public int cash { get; set; } = 0;
         public bool active { get; set; } = true;
+        public DateTime license_exp { get; set; } = DateTime.Now.AddMonths(3);
+        public string license_key { get; set; } = string.Empty;
+
     }
 }

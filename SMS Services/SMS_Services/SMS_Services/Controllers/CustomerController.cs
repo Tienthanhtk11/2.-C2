@@ -42,6 +42,24 @@ namespace SMS_Services.Controllers
                 return this.RouteToInternalServerError();
             }
         }
+        [HttpPost("register")]
+        public async Task<IActionResult> CustomerRegister([FromBody] Customer model)
+        {
+            try
+            {
+                var response = await this._repository.CustomerCreate(model);
+                return Ok(new ResponseSingleContentModel<Customer>
+                {
+                    StatusCode = 200,
+                    Message = "",
+                    Data = response
+                });
+            }
+            catch (Exception)
+            {
+                return this.RouteToInternalServerError();
+            }
+        }
         [HttpPost("modify")]
         public async Task<IActionResult> CustomerModify([FromBody] Customer model)
         {
@@ -100,7 +118,7 @@ namespace SMS_Services.Controllers
                 if (user != null)
                 {
                     int checkAccount = _repository.Customer_Authenticate(login);
-                    UserTokenModel userAuthen = new();
+                    CustomerTokenModel customerAuthen = new();
                     if (checkAccount == 1)
                     {
                         ClaimModel claim = new ClaimModel
@@ -109,18 +127,21 @@ namespace SMS_Services.Controllers
                             name = user.name,
                             id = user.id,
                             user_name = user.user_name,
+
                         };
                         string tokenString = GenerateToken(claim);
-                        userAuthen.token = tokenString;
-                        userAuthen.id = user.id;
-                        userAuthen.user_name = user.user_name;
-                        userAuthen.name = user.name;
-                        userAuthen.token = tokenString;
-                        return Ok(new ResponseSingleContentModel<UserTokenModel>
+                        customerAuthen.token = tokenString;
+                        customerAuthen.id = user.id; 
+                        customerAuthen.license_exp = user.license_exp;
+                        customerAuthen.license_key = user.license_key;
+                        customerAuthen.user_name = user.user_name;
+                        customerAuthen.name = user.name;
+                        customerAuthen.token = tokenString;
+                        return Ok(new ResponseSingleContentModel<CustomerTokenModel>
                         {
                             StatusCode = 200,
                             Message = "Đăng nhập thành công",
-                            Data = userAuthen
+                            Data = customerAuthen
                         });
                     }
                     else

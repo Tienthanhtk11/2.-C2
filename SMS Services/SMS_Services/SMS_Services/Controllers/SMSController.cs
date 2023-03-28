@@ -32,17 +32,17 @@ namespace SMS_Services.Controllers
             _repository.check_port();
             return Ok();
         }
-        //[AllowAnonymous]
-        //[HttpGet("get-list-sms-by-phone")]
-        //public async Task<IActionResult> GetListSMSByPhone(string phone_receive, string phone_send)
-        //{
-        //    return Ok(_repository.GetListSMSByPhone(phone_receive, phone_send));
-        //}
         [AllowAnonymous]
         [HttpGet("get-list-sms-by-phone")]
         public async Task<IActionResult> GetListSMSByPhone2(string phone_receive, string? phone_send)
         {
             return Ok(_repository.GetListSMSByPhone2(phone_receive, phone_send));
+        }
+        [AllowAnonymous]
+        [HttpGet("create-list-sms-receive")]
+        public async Task<IActionResult> Create_SMS_Receive(List<Message_Receive> model)
+        {
+            return Ok(_repository.Create_SMS_Receive(model));
         }
         [AllowAnonymous]
         [HttpGet("list-port")]

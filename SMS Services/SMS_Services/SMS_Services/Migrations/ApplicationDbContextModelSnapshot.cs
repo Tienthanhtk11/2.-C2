@@ -22,6 +22,115 @@ namespace SMS_Services.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("SMS_Services.Model.Admin_User", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
+
+                    b.Property<DateTime>("dateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("dateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("is_delete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("passcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("userAdded")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("userUpdated")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("user_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Admin_User");
+                });
+
+            modelBuilder.Entity("SMS_Services.Model.Customer", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
+
+                    b.Property<bool>("active")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("cash")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("dateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("dateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("is_delete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("license_exp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("license_key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("passcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("userAdded")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("userUpdated")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("user_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Customer");
+                });
+
             modelBuilder.Entity("SMS_Services.Model.Message_Receive", b =>
                 {
                     b.Property<long>("id")
@@ -186,7 +295,10 @@ namespace SMS_Services.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("phone")
+                    b.Property<long>("order_id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("phone_receive")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -227,14 +339,14 @@ namespace SMS_Services.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
 
+                    b.Property<long?>("Orderid")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("dateAdded")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("dateUpdated")
                         .HasColumnType("datetime2");
-
-                    b.Property<float>("discount")
-                        .HasColumnType("real");
 
                     b.Property<bool>("is_delete")
                         .HasColumnType("bit");
@@ -254,9 +366,6 @@ namespace SMS_Services.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("quantity")
-                        .HasColumnType("int");
-
                     b.Property<int>("status")
                         .HasColumnType("int");
 
@@ -275,7 +384,21 @@ namespace SMS_Services.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("Orderid");
+
                     b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("SMS_Services.OrderDetails", b =>
+                {
+                    b.HasOne("SMS_Services.Model.Order", null)
+                        .WithMany("details")
+                        .HasForeignKey("Orderid");
+                });
+
+            modelBuilder.Entity("SMS_Services.Model.Order", b =>
+                {
+                    b.Navigation("details");
                 });
 #pragma warning restore 612, 618
         }

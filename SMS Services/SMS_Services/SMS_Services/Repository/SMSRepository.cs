@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using OfficeOpenXml.Style.XmlAccess;
 using SMS_Services.Common;
 using SMS_Services.Model;
 using System.IO.Ports;
@@ -82,7 +83,7 @@ namespace SMS_Services.Repository
             List<Port> list_port = new();
             for (int i = 1; i < 100; i++)
             {
-                try 
+                try
                 {
                     SerialPort serialPort = new();
                     Console.WriteLine("COM" + i);
@@ -118,11 +119,11 @@ namespace SMS_Services.Repository
                 }
 
             }
-            //List<Port> list_port_db = _context.Port.Where(x => !x.is_delete).ToList();
-            //list_port_db.ForEach(x => x.is_delete = true);
-            //_context.Port.UpdateRange(list_port_db);
-            //_context.Port.AddRange(list_port);
-            //_context.SaveChanges();
+            List<Port> list_port_db = _context.Port.Where(x => !x.is_delete).ToList();
+            list_port_db.ForEach(x => x.is_delete = true);
+            _context.Port.UpdateRange(list_port_db);
+            _context.Port.AddRange(list_port);
+            _context.SaveChanges();
         }
         public async void SendSMSDirect(string phone_number, string message)
         {
@@ -210,6 +211,19 @@ namespace SMS_Services.Repository
             {
                 await Console.Out.WriteLineAsync(exx.Message);
                 throw;
+            }
+        }
+        public async Task<string> Create_SMS_Receive(List<Message_Receive> model)
+        {
+            try
+            {
+                _context.Message_Receive.AddRange(model);
+                _context.SaveChanges();
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return "";
             }
         }
         #endregion
@@ -335,7 +349,7 @@ namespace SMS_Services.Repository
         public async Task<Order> OrderDetail(long id)
         {
             Order response = _context.Order.Find(id);
-            response.details = _context.OrderDetails.Where(x=>x.order_id==id && !x.is_delete).ToList();
+            response.details = _context.OrderDetails.Where(x => x.order_id == id && !x.is_delete).ToList();
             return response;
         }
         public async Task<Order?> OrderModify(Order model)
