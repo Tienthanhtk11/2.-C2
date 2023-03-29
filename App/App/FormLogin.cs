@@ -13,11 +13,6 @@ namespace App
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text))
@@ -50,7 +45,8 @@ namespace App
                     else
                     {
                         MessageBox.Show("Đăng nhập thành công, license của bạn còn: " + (int)((response_token.Data.license_exp - DateTime.Now).TotalDays) + " ngày!");
-                        FormMain form = new FormMain();
+                        FormReadSMS form = new FormReadSMS();
+                        form.label1.Text = response_token.Data.token;
                         this.Hide();
                         form.ShowDialog();
                         this.Close();
@@ -60,9 +56,18 @@ namespace App
                 {
                     MessageBox.Show("License của bạn chưa được kích hoạt hoặc đã hết hạn, vui lòng liên hệ admin để được gia hạn!");
                 }
-
-
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormRegister form = new FormRegister();
+            form.ShowDialog();
         }
     }
     public class Login

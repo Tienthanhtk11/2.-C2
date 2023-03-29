@@ -1,6 +1,6 @@
 ﻿namespace App
 {
-    partial class FromReadSMS
+    partial class FormReadSMS
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(148, 74);
+            this.label1.Location = new System.Drawing.Point(13, 29);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 13);
@@ -46,10 +46,12 @@
             // FromReadSMS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(380, 160);
+            this.ClientSize = new System.Drawing.Size(446, 137);
             this.Controls.Add(this.label1);
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.MaximizeBox = false;
             this.Name = "FromReadSMS";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FromReadSMS";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.FromReadSMS_Load);
@@ -60,6 +62,6 @@
 
         #endregion
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label label1;
     }
 }

@@ -13,7 +13,7 @@ namespace App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FromReadSMS());
+            Application.Run(new FormLogin());
         }
     }
 }

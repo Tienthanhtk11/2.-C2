@@ -122,11 +122,11 @@
     <Compile Include="FormRegister.Designer.cs">
       <DependentUpon>FormRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="FromReadSMS.cs">
+    <Compile Include="FormReadSMS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FromReadSMS.Designer.cs">
-      <DependentUpon>FromReadSMS.cs</DependentUpon>
+    <Compile Include="FormReadSMS.Designer.cs">
+      <DependentUpon>FormReadSMS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202303260838324_initdb1.cs" />
     <Compile Include="Migrations\202303260838324_initdb1.designer.cs">
@@ -149,8 +149,8 @@
     <EmbeddedResource Include="FormRegister.resx">
       <DependentUpon>FormRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FromReadSMS.resx">
-      <DependentUpon>FromReadSMS.cs</DependentUpon>
+    <EmbeddedResource Include="FormReadSMS.resx">
+      <DependentUpon>FormReadSMS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202303260838324_initdb1.resx">
       <DependentUpon>202303260838324_initdb1.cs</DependentUpon>

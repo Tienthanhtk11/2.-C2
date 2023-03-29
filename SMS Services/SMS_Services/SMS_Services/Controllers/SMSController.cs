@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using OfficeOpenXml;
 using SMS_Services.Model;
 using SMS_Services.Repository;
+using System.Collections.Generic;
 using System.Data;
 using System.Net;
 
@@ -32,14 +33,25 @@ namespace SMS_Services.Controllers
             _repository.check_port();
             return Ok();
         }
-        [AllowAnonymous]
         [HttpGet("get-list-sms-by-phone")]
         public async Task<IActionResult> GetListSMSByPhone2(string phone_receive, string? phone_send)
         {
             return Ok(_repository.GetListSMSByPhone2(phone_receive, phone_send));
         }
+        [HttpGet("get-list-sms-receive")]
+        public async Task<IActionResult> GetListSMSReceive()
+        {
+            long user_id = userid(_httpContextAccessor);
+            var response = await _repository.GetListSMSReceive(user_id);
+            return Ok(new ResponseSingleContentModel<List<Message_Receive>>
+            {
+                StatusCode = 200,
+                Message = "",
+                Data = response
+            });
+        }
         [AllowAnonymous]
-        [HttpGet("create-list-sms-receive")]
+        [HttpPost("create-list-sms-receive")]
         public async Task<IActionResult> Create_SMS_Receive(List<Message_Receive> model)
         {
             return Ok(_repository.Create_SMS_Receive(model));

@@ -561,7 +561,7 @@ namespace App.Common
                 if (item != " " && item != "" && !item.Contains("+CPMS"))
                 {
 
-                    if (item.Contains("+CMGL") && !item.Contains("REC READ"))
+                    if (item.StartsWith("+CMGL") )
                     {
                         if (mess.message != null && mess.message != "")
                         {
@@ -578,6 +578,7 @@ namespace App.Common
                 }
             }
             messages.Add(mess);
+            messages= messages.Where(x=> x.phone_send != "" && x.message != "" && !x.status.Contains("REC READ")).ToList();
             return messages;
         }
         #endregion
