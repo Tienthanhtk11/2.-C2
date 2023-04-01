@@ -30,30 +30,45 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(12, 43);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(1727, 679);
+            this.textBox1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 29);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(23, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Reading SMS...";
+            this.label1.Text = "label1";
             // 
-            // FromReadSMS
+            // FormReadSMS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(446, 137);
+            this.ClientSize = new System.Drawing.Size(1751, 734);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.MaximizeBox = false;
-            this.Name = "FromReadSMS";
+            this.Name = "FormReadSMS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FromReadSMS";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.Text = "Automation read sms application";
             this.Load += new System.EventHandler(this.FromReadSMS_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -62,6 +77,8 @@
 
         #endregion
         private System.Windows.Forms.Timer timer1;
+        public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

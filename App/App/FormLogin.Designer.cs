@@ -30,7 +30,6 @@ namespace App
         {
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -40,45 +39,34 @@ namespace App
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 79);
+            this.label1.Location = new System.Drawing.Point(64, 56);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 16);
+            this.label1.Size = new System.Drawing.Size(76, 16);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Tên đăng nhập:";
+            this.label1.Text = "User name:";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(178, 75);
+            this.textBox1.Location = new System.Drawing.Point(179, 52);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(204, 22);
             this.textBox1.TabIndex = 1;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(178, 162);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 28);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Đóng";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 119);
+            this.label2.Location = new System.Drawing.Point(64, 96);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 16);
+            this.label2.Size = new System.Drawing.Size(70, 16);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Mật khẩu:";
+            this.label2.Text = "Password:";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(178, 116);
+            this.textBox2.Location = new System.Drawing.Point(179, 93);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
@@ -89,37 +77,37 @@ namespace App
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(290, 162);
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button2.Location = new System.Drawing.Point(278, 139);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 28);
             this.button2.TabIndex = 3;
-            this.button2.Text = "Đăng nhập";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Text = "Login";
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(66, 162);
+            this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button3.Location = new System.Drawing.Point(103, 139);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(92, 28);
             this.button3.TabIndex = 5;
-            this.button3.Text = "Đăng ký";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Text = "Registration";
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 276);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(462, 202);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -138,7 +126,6 @@ namespace App
 
         private Label label1;
         private TextBox textBox1;
-        private Button button1;
         private Label label2;
         private TextBox textBox2;
         private Button button2;

@@ -17,7 +17,7 @@ namespace App
         {
             if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text))
             {
-                MessageBox.Show("Không được bỏ trống Tài khoản & mật khẩu");
+                MessageBox.Show("Please fill user name & password!");
             }
             else
             {
@@ -26,7 +26,7 @@ namespace App
                     user_name = textBox1.Text,
                     password = textBox2.Text,
                 };
-                string ServiceUrl = "https://localhost:7067/api/";
+                string ServiceUrl = "http://localhost:8088/api/";
                 try
                 {
                     string resourcePath = "customer/login";
@@ -40,13 +40,13 @@ namespace App
                     var response_token = JsonConvert.DeserializeObject<ResponseSingleContentModel<CustomerTokenModel>>(response.Content ?? "");
                     if (DateTime.Now >= response_token.Data.license_exp)
                     {
-                        MessageBox.Show("License của bạn đã hết hạn, vui lòng liên hệ admin để được gia hạn!");
+                        MessageBox.Show("Your license has expired, please contact admin to renew it!");
                     }
                     else
                     {
-                        MessageBox.Show("Đăng nhập thành công, license của bạn còn: " + (int)((response_token.Data.license_exp - DateTime.Now).TotalDays) + " ngày!");
+                        MessageBox.Show("Login Susscess, Your license exp: " + response_token.Data.license_exp);
                         FormReadSMS form = new FormReadSMS();
-                        form.label1.Text = response_token.Data.token;
+                        form.label1.Text = "Reading... \r\n Your new mesage show below.";
                         this.Hide();
                         form.ShowDialog();
                         this.Close();
@@ -54,7 +54,7 @@ namespace App
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("License của bạn chưa được kích hoạt hoặc đã hết hạn, vui lòng liên hệ admin để được gia hạn!");
+                    MessageBox.Show("Your license has not been activated or has expired, please contact admin to renew it!");
                 }
             }
         }

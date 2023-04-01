@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SMS_Services.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class BaseController : ControllerBase
     {
         protected long userid(IHttpContextAccessor _httpContextAccessor)

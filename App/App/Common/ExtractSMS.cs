@@ -39,7 +39,7 @@ namespace App.Common
 
             catch (Exception ex)
             {
-                //throw ex;
+                return null;
             }
             return port;
         }
@@ -77,7 +77,7 @@ namespace App.Common
             }
             catch (Exception ex)
             {
-                throw ex;
+                return ex.Message;
             }
         }
 
@@ -545,14 +545,17 @@ namespace App.Common
         {
             Console.WriteLine("Reading..");
             port.WriteLine("AT+CMGF=1"); // Set mode to Text(1) or PDU(0)
-            Thread.Sleep(1000); // Give a second to write
+            Thread.Sleep(1000);
             port.WriteLine("AT+CPMS=\"SM\""); // Set storage to SIM(SM)
             Thread.Sleep(1000);
             port.WriteLine("AT+CMGL=\"ALL\""); // What category to read ALL, REC READ, or REC UNREAD
-            Thread.Sleep(1000);
             port.Write("\r");
             Thread.Sleep(1000);
             string response = port.ReadExisting();
+            Console.WriteLine(response);
+
+            string xxx = port.ReadExisting();
+            Console.WriteLine(xxx);
             string[] mess_trim = response.Replace('\r', ' ').Replace("OK", "").TrimEnd().Split('\n');
             List<Message_Receive> messages = new List<Message_Receive>();
             Message_Receive mess = new Message_Receive();
@@ -561,7 +564,7 @@ namespace App.Common
                 if (item != " " && item != "" && !item.Contains("+CPMS"))
                 {
 
-                    if (item.StartsWith("+CMGL") )
+                    if (item.StartsWith("+CMGL"))
                     {
                         if (mess.message != null && mess.message != "")
                         {
@@ -577,42 +580,23 @@ namespace App.Common
                         mess.message = mess.message + '\n' + item;
                 }
             }
+            Thread.Sleep(2000);
             messages.Add(mess);
-            messages= messages.Where(x=> x.phone_send != "" && x.message != "" && !x.status.Contains("REC READ")).ToList();
+            //messages = messages.Where(x => x.phone_send != "" && x.message != "" && !x.status.Contains("REC READ")).ToList();
+            //DeleteMsg(port);
             return messages;
         }
         #endregion
 
-        #region Delete SMS
-        public bool DeleteMsg(SerialPort port, string p_strCommand)
+        public void DeleteMsg(SerialPort port)
         {
-            bool isDeleted = false;
-            try
-            {
-
-                #region Execute Command
-                string recievedData = ExecCommand(port, "AT", 300, "No phone connected");
-                recievedData = ExecCommand(port, "AT+CMGF=1", 300, "Failed to set message format.");
-                String command = p_strCommand;
-                recievedData = ExecCommand(port, command, 300, "Failed to delete message");
-                #endregion
-
-                if (recievedData.EndsWith("\r\nOK\r\n"))
-                {
-                    isDeleted = true;
-                }
-                if (recievedData.Contains("ERROR"))
-                {
-                    isDeleted = false;
-                }
-                return isDeleted;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+            #region Execute Command
+            string recievedData = ExecCommand(port, "AT", 300, "No phone connected");
+            recievedData = ExecCommand(port, "AT+CMGF=1", 300, "No phone connected");
+            recievedData = ExecCommand(port, "AT+CMGD=1,1", 300, "No phone connected");
+            Console.WriteLine(recievedData);
         }
+
         #endregion
     }
 }

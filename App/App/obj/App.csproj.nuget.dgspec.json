@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\2. Work\\2. C2\\App\\App\\App.csproj": {}
+  },
+  "projects": {
+    "E:\\2. Work\\2. C2\\App\\App\\App.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\2. Work\\2. C2\\App\\App\\App.csproj",
+        "projectName": "App",
+        "projectPath": "E:\\2. Work\\2. C2\\App\\App\\App.csproj",
+        "packagesPath": "C:\\Users\\tient\\.nuget\\packages\\",
+        "outputPath": "E:\\2. Work\\2. C2\\App\\App\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\tient\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[109.0.1, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-arm64": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

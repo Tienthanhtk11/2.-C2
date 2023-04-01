@@ -46,7 +46,6 @@ App/App/bin/Debug/System.Text.Encodings.Web.dll
 App/App/bin/Debug/System.Text.Json.dll
 App/App/bin/Debug/System.Threading.Tasks.Extensions.dll
 App/App/bin/Debug/System.ValueTuple.dll
-*.json
 App/App/obj/App.csproj.nuget.g.props
 App/App/obj/App.csproj.nuget.g.targets
 App/App/obj/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs
@@ -83,3 +82,10 @@ SMS Services/SMS_Services/.vs/ProjectEvaluation/sms_services.metadata.v6.1
 SMS Services/SMS_Services/.vs/ProjectEvaluation/sms_services.projects.v6.1
 SMS Services/SMS_Services/.vs/SMS_Services/FileContentIndex/e848453c-f528-4b22-87a9-5d33620f32da.vsidx
 SMS Services/SMS_Services/.vs/SMS_Services/v17/.futdcache.v2
+App/.vs/App/FileContentIndex/f62a5040-cab1-418e-aa84-eea43fa06e7b.vsidx
+App/.vs/App/FileContentIndex/b0d4c902-e082-4b33-b382-75227b495e40.vsidx
+App/.vs/App/FileContentIndex/9b1f09c7-445a-4232-a7b7-73613c9643a6.vsidx
+App/.vs/App/FileContentIndex/77ca72e0-4389-4418-ad9f-76eec91ced3f.vsidx
+App/.vs/App/FileContentIndex/5c833697-1281-42e3-9ffe-ca250c44d071.vsidx
+App/.vs/App/FileContentIndex/4ee371bc-8041-4900-833d-b9c7b1267271.vsidx
+App/.vs/App/FileContentIndex/26bbd5c0-f5f7-4f04-a4ba-bf24ece06d5b.vsidx
