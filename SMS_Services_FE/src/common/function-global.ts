@@ -1,4 +1,5 @@
-import { notification } from "antd"
+import { notification } from "antd";
+import { persistor, store } from "@/common/configureStore";
 
 export function mapSelectAntd(list: Array<any>, label: string, value: string) {
     return list.map((obj: any) => {
@@ -9,7 +10,7 @@ export function mapSelectAntd(list: Array<any>, label: string, value: string) {
     })
 }
 
-export async function sendRequest_$POST(url: string, { arg }: any) {
+export async function sendRequestLogin_$POST(url: string, { arg }: any) {
     return fetch(url, {
         method: 'POST',
         headers: {
@@ -17,6 +18,28 @@ export async function sendRequest_$POST(url: string, { arg }: any) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(arg),
+    }).then(res => res.json())
+}
+
+export async function sendRequest_$POST(url: string, { arg }: any) {
+    const state = store.getState();
+    let token = "";
+    
+    if (!!state?.infoCurrentUserReducers?.token) {
+        token = state?.infoCurrentUserReducers?.token;
+    }
+    if (!!state?.infoCurrentUserAminReducers?.token) {
+        token = state?.infoCurrentUserAminReducers?.token;
+    }
+
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: await JSON.stringify(arg),
     }).then(res => res.json())
 }
 

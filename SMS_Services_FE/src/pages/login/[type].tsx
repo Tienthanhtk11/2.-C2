@@ -1,45 +1,86 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Checkbox, Form, Input, Layout } from "antd";
 import style from "../login/login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import useSWRMutation from "swr/mutation";
-import { sendRequest_$POST } from "@/common/function-global";
+import { notificationError, notificationSuccess, sendRequestLogin_$POST } from "@/common/function-global";
 import { user } from "@/services/user";
-import { add_info_current_admin_user } from "@/store/action/info_current_user_admin_action";
+import { add_info_current_admin_user, clear_info_current_admin_user } from "@/store/action/info_current_user_admin_action";
+import { statusCode, userType } from "@/common/enum";
+import { customer } from "@/services/customer";
+import { add_info_current_user, clear_info_current_user } from "@/store/action/info_current_user_action";
+import { typeUser_add } from "@/store/action/type_user_action";
 
 export default function Login() {
   const router = useRouter();
-
+  const [getTypeLogin, setTypeLogin] = useState('');
   // get user admin
-  const getInfoCurrentUserAdmin = useSelector(
-    (state: any) => state.infoCurrentUserAminReducers
+  const getStore = useSelector(
+    (state: any) => {
+      return {
+        admin: state.infoCurrentUserAminReducers,
+        customer: state.infoCurrentUserReducers
+      }
+    }
   );
   const dispatch = useDispatch();
 
   const {
-    trigger,
+    trigger: triggerAdmin,
     data: adminLoginData,
-    error,
-  } = useSWRMutation(user().login, sendRequest_$POST);
+    error: errorAdmin,
+  } = useSWRMutation(user().login, sendRequestLogin_$POST);
+
+  const {
+    trigger: triggerCustomer,
+    data: customerLoginData,
+    error: errorCustomer,
+  } = useSWRMutation(customer().customer().login, sendRequestLogin_$POST);
 
   const handleFormSubmit = async (values: any) => {
     let datapush: any = {
       user_name: values.user_name,
       password: values.password,
     };
-    trigger({
-      ...datapush,
-    });
-  };
-  useEffect(() => {
-    if (adminLoginData?.data) {
-      dispatch(add_info_current_admin_user(adminLoginData.data));
+    if (getTypeLogin == userType.admin) {
+      triggerAdmin({
+        ...datapush,
+      });
+      dispatch(clear_info_current_user())
+      dispatch(typeUser_add(userType.admin))
     }
-    if (getInfoCurrentUserAdmin?.token) {
+    else {
+      triggerCustomer({
+        ...datapush,
+      });
+      dispatch(clear_info_current_admin_user())
+      dispatch(typeUser_add(userType.customer))
+    }
+  };
+
+  useEffect(() => {
+    if (router.isReady) {
+      setTypeLogin(`${router.query.type}`);
+    }
+    if (adminLoginData?.statusCode == statusCode.OK) {
+      notificationSuccess(adminLoginData.message);
+      dispatch(add_info_current_admin_user(adminLoginData.data));
       router.push("/");
     }
-  }, [adminLoginData, getInfoCurrentUserAdmin]);
+    if ((!!adminLoginData) && adminLoginData?.statusCode == statusCode.Error) {
+      notificationError(adminLoginData?.message);
+    }
+    if (customerLoginData?.statusCode == statusCode.OK) {
+      notificationSuccess(customerLoginData.message);
+      dispatch(add_info_current_user(customerLoginData.data));
+      router.push("/");
+    }
+    if ((!!customerLoginData) && customerLoginData?.statusCode == statusCode.Error) {
+      notificationError(customerLoginData?.message);
+    }    
+  }, [router.isReady,adminLoginData, customerLoginData]);
+  // router.isReady, adminLoginData, getStore, customerLoginData
   return (
     <>
       <Layout className={`${style.layout}`}>
@@ -97,3 +138,4 @@ export default function Login() {
     </>
   );
 }
+

@@ -1,6 +1,8 @@
 export const infoCurrentUserAminReducers = (state = {}, action: any) => {
     switch (action.type) {
-        case "login":
+        case "loginadmin":
+            return action.payload;
+        case "logoutadmin":
             return action.payload;
         default:
             return state;
