@@ -1,5 +1,6 @@
 import { notification } from "antd";
 import { persistor, store } from "@/common/configureStore";
+import { useMemo } from "react";
 
 export function mapSelectAntd(list: Array<any>, label: string, value: string) {
     return list.map((obj: any) => {
@@ -21,17 +22,46 @@ export async function sendRequestLogin_$POST(url: string, { arg }: any) {
     }).then(res => res.json())
 }
 
-export async function sendRequest_$POST(url: string, { arg }: any) {
+export function getToken() {
+
     const state = store.getState();
     let token = "";
-    
-    if (!!state?.infoCurrentUserReducers?.token) {
+    console.log('aaaa',state?.infoCurrentUserReducers);
+    console.log('bbbbbbbb',state?.infoCurrentUserAminReducers);
+    if (state?.infoCurrentUserReducers?.token) {
+        console.log('vào1');
         token = state?.infoCurrentUserReducers?.token;
     }
-    if (!!state?.infoCurrentUserAminReducers?.token) {
+
+    if (state?.infoCurrentUserAminReducers?.token) {
+        console.log('vào2');
         token = state?.infoCurrentUserAminReducers?.token;
     }
 
+    const headers = useMemo(
+        () => ({
+            headers: {
+                // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDNkMWU0Mi05NTdkLTQyOTItYjI4Yy0yOTMwYzViN2UyMTciLCJ1bmlxdWVfbmFtZSI6ImN1c3RvbWVyX3RoYW5oIiwibmFtZWlkIjoiY3VzdG9tZXJfdGhhbmgiLCJlbWFpbCI6ImN1c3RvbWVyX3RoYW5oIiwic2lkIjoiMSIsImV4cCI6MTY4MDQyOTQ4NSwiaXNzIjoibXlsb2NhbC5jb20iLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo0NDM3MSJ9.tCPrAdCpUhh9yZUS_hQcY0nopGBSX2SVIbzyWT0GWTI`
+                Authorization: `Bearer ${token}`
+            },
+        }),
+        [token]
+    );
+    
+    return headers;
+}
+
+export async function sendRequest_$POST(url: string, { arg }: any) {
+    const state = store.getState();
+    let token = "";
+
+    if (state?.infoCurrentUserReducers) {
+        token = await state?.infoCurrentUserReducers?.token;
+    }
+    if (state?.infoCurrentUserAminReducers) {
+        token = await state?.infoCurrentUserAminReducers?.token;
+    }
+    console.log(token);
     return fetch(url, {
         method: 'POST',
         headers: {

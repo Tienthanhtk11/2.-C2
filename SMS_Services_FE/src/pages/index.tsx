@@ -100,7 +100,7 @@ export default function Admin() {
         }
       ]
       if (getTypeUser == userType.admin) {
-        let mapMenu = menu.map(obj => {
+        let mapMenu = menu.map((obj:any) => {
           delete obj.active;
           return obj
         });
@@ -108,7 +108,7 @@ export default function Admin() {
         setSelectedMenuItem('2')
       }
       else {
-        let mapMenu = menu.map(obj => {
+        let mapMenu = menu.map((obj:any) => {
           if (obj?.active == getTypeUser) {
             delete obj.active;
             return obj

@@ -4,6 +4,7 @@ import type { ColumnsType } from "antd/es/table";
 import useSWR from "swr";
 import { sms } from "@/services/sms";
 import { fetcher } from "@/common/const";
+import { getToken } from "@/common/function-global";
 
 interface DataType {
   date_receive: string;
@@ -49,8 +50,8 @@ export default function SMS(props: any) {
     error,
     isLoading,
     mutate,
-  } = useSWR(sms().list(), fetcher);
-
+  } = useSWR([sms().list(), getToken()], ([url, token]) => fetcher(url, token));
+ 
   useEffect(() => {
     if (listRes && !error) {
       setListTable(listRes.data);
