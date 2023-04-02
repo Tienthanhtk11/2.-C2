@@ -47,6 +47,7 @@ namespace App
                         MessageBox.Show("Login Susscess, Your license exp: " + response_token.Data.license_exp);
                         FormReadSMS form = new FormReadSMS();
                         form.label1.Text = "Reading... \r\n Your new mesage show below.";
+                        form.label2.Text = response_token.Data.id.ToString();
                         this.Hide();
                         form.ShowDialog();
                         this.Close();

@@ -33,6 +33,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // timer1
@@ -58,10 +59,21 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1651, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "label2";
+            this.label2.Visible = false;
+            // 
             // FormReadSMS
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1751, 734);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
@@ -80,5 +92,6 @@
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer2;
+        public System.Windows.Forms.Label label2;
     }
 }

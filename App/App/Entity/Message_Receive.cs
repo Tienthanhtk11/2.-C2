@@ -11,6 +11,7 @@ namespace App.Entity
         public string status { get; set; } = "";
         public long id { set; get; }
         public DateTime dateAdded { get; set; } = DateTime.Now;
+        public long userAdded { set; get; } = 0;
         public bool is_delete { get; set; } = false;
     }
 }

@@ -18,7 +18,8 @@ namespace SMS_Services.Repository
         void check_port();
         Task<List<Message_Receive>> GetListSMSByPhone(string phone_receive, string phone_send);
         Task<List<Message_Receive>> GetListSMSByPhone2(string phone_receive, string? phone_send);
-        Task<List<Message_Receive>> GetListSMSReceive(long user_id);    
+        Task<List<Message_Receive>> GetListSMSReceive(long user_id);
+        Task<List<Message_Receive>> GetListSMSReceiveAdmin();
         Task<string> Create_SMS_Receive(List<Message_Receive> model);
         #endregion
         #region Admin

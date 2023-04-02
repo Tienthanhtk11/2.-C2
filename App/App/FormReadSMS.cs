@@ -14,6 +14,8 @@ namespace App
         {
             InitializeComponent();
         }
+        public static long customer_id = 0;
+
         public static ExtractSMS extractSMS = new ExtractSMS();
         public static string log = "";
         static void ReadSMS(object str)
@@ -23,7 +25,6 @@ namespace App
                 SerialPort serialPort = new SerialPort();
                 try
                 {
-
                     serialPort = extractSMS.OpenPort(str.ToString(), Convert.ToInt32(115200), Convert.ToInt32(8), Convert.ToInt32(100), Convert.ToInt32(100));
                     if (serialPort!= null)
                     {
@@ -33,6 +34,7 @@ namespace App
                             foreach (var sms in list_sms)
                             {
                                 sms.phone_receive = str.ToString();
+                                sms.userAdded = customer_id;
                                 log = "new SMS from: " + str.ToString() + ", content: " + sms.message + " ,phone send: " + sms.phone_send + " , time: " + sms.date_receive + "\r\n" + log;
                             }
                             if (true)
@@ -65,14 +67,15 @@ namespace App
         }
         private void FromReadSMS_Load(object sender, EventArgs e)
         {
-            String com1 = "COM37";
-            String com2 = "COM40";
-            Thread thread1 = new Thread(ReadSMS);
-            Thread thread2 = new Thread(ReadSMS);
-            timer1.Interval = 1000;
+            customer_id = long.Parse(label1.Text);
+            for (int i = 0; i < 100; i++)
+            {
+                string port = "COM" + i;
+                Thread thread = new Thread(ReadSMS);
+                thread.Start(port);
+            }
+            timer1.Interval = 2000;
             timer1.Start();
-            thread1.Start(com1);
-            //thread2.Start(com2);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

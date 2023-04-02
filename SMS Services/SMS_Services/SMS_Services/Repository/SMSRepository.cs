@@ -217,6 +217,10 @@ namespace SMS_Services.Repository
         {
             return _context.Message_Receive.Where(x => !x.is_delete && x.userAdded == user_id).OrderByDescending(x => x.id).ToList();
         }
+        public async Task<List<Message_Receive>> GetListSMSReceiveAdmin()
+        {
+            return _context.Message_Receive.Where(x => !x.is_delete ).OrderByDescending(x => x.id).ToList();
+        }
         public async Task<string> Create_SMS_Receive(List<Message_Receive> model)
         {
             try

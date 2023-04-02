@@ -50,19 +50,28 @@ namespace SMS_Services.Controllers
                 Data = response
             });
         }
+        [HttpGet("get-list-sms-receive-admin")]
+        public async Task<IActionResult> GetListSMSReceiveAdmin()
+        {
+            var response = await _repository.GetListSMSReceiveAdmin();
+            return Ok(new ResponseSingleContentModel<List<Message_Receive>>
+            {
+                StatusCode = 200,
+                Message = "",
+                Data = response
+            });
+        }
         [AllowAnonymous]
         [HttpPost("create-list-sms-receive")]
         public async Task<IActionResult> Create_SMS_Receive(List<Message_Receive> model)
         {
             return Ok(_repository.Create_SMS_Receive(model));
         }
-        [AllowAnonymous]
         [HttpGet("list-port")]
         public async Task<IActionResult> PortList()
         {
             return Ok(_repository.PortList());
         }
-        [AllowAnonymous]
         [HttpGet("send-single-sms")]
         public async Task<IActionResult> SendSMSDirect(string phone_number, string message)
         {
