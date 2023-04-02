@@ -50,8 +50,8 @@ export default function SMS(props: any) {
     error,
     isLoading,
     mutate,
-  } = useSWR([sms().list(), getToken()], ([url, token]) => fetcher(url, token));
- 
+  } = useSWR([sms().list_admin(), getToken()], ([url, token]) => fetcher(url, token));
+
   useEffect(() => {
     if (listRes && !error) {
       setListTable(listRes.data);
