@@ -8,6 +8,7 @@ import ModifyOrderModal from "./ModifyOrderModal";
 import DeleteOrderModal from "./DeleteOrderModal";
 import { fetcher } from "@/common/const";
 import ViewOrderModal from "./ViewOrderModal";
+import { getToken } from "@/common/function-global";
 
 interface DataType {
   code: string;
@@ -81,7 +82,7 @@ export default function Order(props: any) {
     error,
     isLoading,
     mutate,
-  } = useSWR(order().list(), fetcher);
+  } = useSWR([order().list(), getToken()], ([url, token]) => fetcher(url, token));  
 
   useEffect(() => {
     if (listRes && !error) {

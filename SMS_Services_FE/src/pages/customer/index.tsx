@@ -4,6 +4,7 @@ import type { ColumnsType } from "antd/es/table";
 import useSWR from "swr";
 import { customer } from "@/services/customer";
 import { fetcher } from "@/common/const";
+import { getToken } from "@/common/function-global";
 
 interface DataType {
   name: string;
@@ -55,8 +56,7 @@ export default function Customer() {
     error,
     isLoading,
     mutate,
-  } = useSWR(customer().customer().list(filterTable), fetcher);
-
+  } = useSWR([customer().customer().list(filterTable), getToken()], ([url, token]) => fetcher(url, token));  
   useEffect(() => {
     if (listRes && !error) {
       setListTable(listRes?.data);

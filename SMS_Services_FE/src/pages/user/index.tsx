@@ -7,6 +7,7 @@ import CreateUserModal from "./createUserModal";
 import useSWR from "swr";
 import { user } from "@/services/user";
 import { fetcher } from "@/common/const";
+import { getToken } from "@/common/function-global";
 
 interface DataType {
   user_name: string;
@@ -61,8 +62,8 @@ export default function User() {
     error,
     isLoading,
     mutate,
-  } = useSWR(user().admin().list(filterTable), fetcher);
-
+  } = useSWR([user().admin().list(filterTable), getToken()], ([url, token]) => fetcher(url, token));
+  
   useEffect(() => {
     if (listRes && !error) {
       setListTable(listRes?.data);
