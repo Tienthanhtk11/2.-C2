@@ -42,18 +42,24 @@ namespace SMS_Services.Controllers
                 return this.RouteToInternalServerError();
             }
         }
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> CustomerRegister([FromBody] Customer model)
         {
             try
             {
                 var response = await this._repository.CustomerCreate(model);
-                return Ok(new ResponseSingleContentModel<Customer>
+                if (response != null)
                 {
-                    StatusCode = 200,
-                    Message = "",
-                    Data = response
-                });
+                    return Ok(new ResponseSingleContentModel<Customer>
+                    {
+                        StatusCode = 200,
+                        Message = "",
+                        Data = response
+                    });
+                }
+              else
+                    return this.RouteToInternalServerError();
             }
             catch (Exception)
             {

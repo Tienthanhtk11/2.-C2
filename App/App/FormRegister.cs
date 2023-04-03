@@ -24,7 +24,7 @@ namespace App
                 email = textBox3.Text,
                 name = textBox4.Text,
                 active = true,
-                is_delete = true,
+                is_delete = false,
                 cash = 0,
                 license_exp = DateTime.Now,
                 dateAdded = DateTime.Now,
@@ -33,7 +33,7 @@ namespace App
                 userAdded = 0,
             };
             string resourcePath = "customer/register";
-            string ServiceUrl = "http://localhost:8088/api/";
+            string ServiceUrl = "http://103.120.242.146:8088/api/";
             var body = JsonConvert.SerializeObject(customer_resign);
             var client = new RestClient(ServiceUrl);
             var request = new RestRequest(resourcePath, Method.Post);
@@ -46,7 +46,7 @@ namespace App
                 var response_token = JsonConvert.DeserializeObject<ResponseSingleContentModel<Customer>>(response.Content ?? "");
                 MessageBox.Show("Registration Susscess, Your license exp: " + response_token.Data.license_exp );
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Registration False, please contact with Admin!");
             }

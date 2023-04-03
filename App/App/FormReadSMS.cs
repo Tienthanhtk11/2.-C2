@@ -22,11 +22,12 @@ namespace App
         {
             while (true)
             {
+                Console.WriteLine("thread {0} str start", str);
                 SerialPort serialPort = new SerialPort();
                 try
                 {
                     serialPort = extractSMS.OpenPort(str.ToString(), Convert.ToInt32(115200), Convert.ToInt32(8), Convert.ToInt32(100), Convert.ToInt32(100));
-                    if (serialPort!= null)
+                    if (serialPort != null)
                     {
                         var list_sms = extractSMS.ReadUnReadMesss(serialPort);
                         if (list_sms.Count > 0)
@@ -37,25 +38,23 @@ namespace App
                                 sms.userAdded = customer_id;
                                 log = "new SMS from: " + str.ToString() + ", content: " + sms.message + " ,phone send: " + sms.phone_send + " , time: " + sms.date_receive + "\r\n" + log;
                             }
-                            if (true)
-                            {
-                                string ServiceUrl = "https://localhost:7067/api/";
-                                string resourcePath = "SMS/create-list-sms-receive";
-                                var body = JsonConvert.SerializeObject(list_sms);
-                                var client = new RestClient(ServiceUrl);
-                                var request = new RestRequest(resourcePath, Method.Post);
-                                request.AddHeader("Content-Type", "application/json");
-                                request.AddHeader("Accept", "application/json");
-                                request.AddJsonBody(body);
-                                var response = client.Execute(request);
-                                Console.WriteLine(response);
-                            }
+                            string ServiceUrl = "http://103.120.242.146:8088/api/";
+                            string resourcePath = "SMS/create-list-sms-receive";
+                            var body = JsonConvert.SerializeObject(list_sms);
+                            var client = new RestClient(ServiceUrl);
+                            var request = new RestRequest(resourcePath, Method.Post);
+                            request.AddHeader("Content-Type", "application/json");
+                            request.AddHeader("Accept", "application/json");
+                            request.AddJsonBody(body);
+                            var response = client.Execute(request);
+                            Console.WriteLine(response);
                         }
                         extractSMS.ClosePort(serialPort);
-
+                        Console.WriteLine("Scan xong port {0}", str);
                     }
                     else
                     {
+                        Console.WriteLine("Tam dung thread {0} 60s", str);
                         Thread.Sleep(60000);
                     }
                 }
@@ -67,11 +66,12 @@ namespace App
         }
         private void FromReadSMS_Load(object sender, EventArgs e)
         {
-            customer_id = long.Parse(label1.Text);
+            customer_id = long.Parse(label2.Text);
             for (int i = 0; i < 100; i++)
             {
                 string port = "COM" + i;
                 Thread thread = new Thread(ReadSMS);
+                thread.IsBackground=true;
                 thread.Start(port);
             }
             timer1.Interval = 2000;
@@ -82,10 +82,14 @@ namespace App
         {
             string input = log;
             Console.WriteLine(input);
-            textBox1.Text = input;
+            textBox1.Text = input + "\r\n"+ textBox1.Text;
             timer1.Interval = 5000;
             timer1.Start();
         }
 
+        private void FormReadSMS_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(Environment.ExitCode);
+        }
     }
 }

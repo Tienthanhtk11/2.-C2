@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.VisualBasic;
 using OfficeOpenXml.Style.XmlAccess;
 using SMS_Services.Common;
 using SMS_Services.Model;
@@ -294,6 +295,12 @@ namespace SMS_Services.Repository
         #region Customer
         public async Task<Customer> CustomerCreate(Customer model)
         {
+            var customer_db = _context.Customer.AsNoTracking().FirstOrDefault(x=>!x.is_delete && x.user_name == model.user_name && x.email == model.email);
+            if (customer_db!=null)
+            {
+                return null;
+            }
+            model.license_exp = DateTime.Now.AddMonths(3);
             model.passcode = Encryptor.RandomPassword();
             model.password = Encryptor.MD5Hash(model.password + model.passcode);
             _context.Customer.Add(model);

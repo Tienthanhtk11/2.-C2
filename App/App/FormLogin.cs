@@ -26,7 +26,7 @@ namespace App
                     user_name = textBox1.Text,
                     password = textBox2.Text,
                 };
-                string ServiceUrl = "http://localhost:8088/api/";
+                string ServiceUrl = "http://103.120.242.146:8088/api/";
                 try
                 {
                     string resourcePath = "customer/login";
@@ -46,7 +46,7 @@ namespace App
                     {
                         MessageBox.Show("Login Susscess, Your license exp: " + response_token.Data.license_exp);
                         FormReadSMS form = new FormReadSMS();
-                        form.label1.Text = "Reading... \r\n Your new mesage show below.";
+                        form.label1.Text = "Reading... \r\nYour new mesage show below.";
                         form.label2.Text = response_token.Data.id.ToString();
                         this.Hide();
                         form.ShowDialog();

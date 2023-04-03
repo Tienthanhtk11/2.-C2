@@ -81,6 +81,7 @@
             this.Name = "FormReadSMS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Automation read sms application";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormReadSMS_FormClosing);
             this.Load += new System.EventHandler(this.FromReadSMS_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
