@@ -35,6 +35,7 @@ namespace SMS_Services.Repository
         Task<Customer> CustomerCreate(Customer model);
         Task<Customer> CustomerModify(Customer model);
         Task<List<Customer>> CustomerList(string? user_name);
+        void CustomerPing(long customer_id);
         int Customer_Authenticate(LoginModel login);
         Task<Order> OrderCreate(Order model);
         Task<Order?> OrderModify(Order model);

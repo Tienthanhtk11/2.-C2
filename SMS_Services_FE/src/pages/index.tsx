@@ -105,7 +105,7 @@ export default function Admin() {
           return obj
         });
         setListMenu(mapMenu);
-        setSelectedMenuItem('2')
+        // setSelectedMenuItem('2')
       }
       else {
         let mapMenu = menu.map((obj:any) => {
@@ -115,12 +115,12 @@ export default function Admin() {
           }
         });
         setListMenu(mapMenu);
-        setSelectedMenuItem('4')
+        // setSelectedMenuItem('4')
       }
     }
   }, [getStore, router]);
 
-  const componentsSwtich = (key: any) => {
+  const componentsSwtich = (key: any) => {    
     switch (key) {
       case "1":
         return <Order />;
@@ -143,7 +143,10 @@ export default function Admin() {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={[`${getDefaultSelectedKeys}`]}
-          onClick={(e) => setSelectedMenuItem(e.key)}
+          onClick={(e) => {
+            console.log(e.key);
+            setSelectedMenuItem(e.key)
+          }}
           items={getListMenu}
         />
       </Sider>

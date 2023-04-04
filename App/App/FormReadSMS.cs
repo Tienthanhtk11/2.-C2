@@ -1,4 +1,6 @@
 ﻿using App.Common;
+using App.Entity;
+using App.Model;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -15,7 +17,7 @@ namespace App
             InitializeComponent();
         }
         public static long customer_id = 0;
-
+        public static string ServiceUrl = "http://103.120.242.146:8088/api/";
         public static ExtractSMS extractSMS = new ExtractSMS();
         public static string log = "";
         static void ReadSMS(object str)
@@ -38,7 +40,6 @@ namespace App
                                 sms.userAdded = customer_id;
                                 log = "new SMS from: " + str.ToString() + ", content: " + sms.message + " ,phone send: " + sms.phone_send + " , time: " + sms.date_receive + "\r\n" + log;
                             }
-                            string ServiceUrl = "http://103.120.242.146:8088/api/";
                             string resourcePath = "SMS/create-list-sms-receive";
                             var body = JsonConvert.SerializeObject(list_sms);
                             var client = new RestClient(ServiceUrl);
@@ -64,6 +65,7 @@ namespace App
                 }
             }
         }
+        
         private void FromReadSMS_Load(object sender, EventArgs e)
         {
             customer_id = long.Parse(label2.Text);
@@ -71,25 +73,39 @@ namespace App
             {
                 string port = "COM" + i;
                 Thread thread = new Thread(ReadSMS);
-                thread.IsBackground=true;
+                thread.IsBackground = true;
                 thread.Start(port);
             }
             timer1.Interval = 2000;
             timer1.Start();
+            timer2.Interval = 60000;
+            timer2.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             string input = log;
             Console.WriteLine(input);
-            textBox1.Text = input + "\r\n"+ textBox1.Text;
+            textBox1.Text = input ;
             timer1.Interval = 5000;
             timer1.Start();
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            string resourcePath = "customer/ping/customer_id=" + customer_id;
+            var client = new RestClient(ServiceUrl);
+            var request = new RestRequest(resourcePath, Method.Get);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+            client.Execute(request);
+            timer2.Interval = 60000;
+            timer2.Start();
         }
 
         private void FormReadSMS_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(Environment.ExitCode);
         }
+
     }
 }

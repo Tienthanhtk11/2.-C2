@@ -13,6 +13,8 @@ interface DataType {
   active: boolean;
   id: number;
   dateAdded: Date;
+  last_active: Date;
+
 }
 
 export default function Customer() {
@@ -23,24 +25,29 @@ export default function Customer() {
       key: "id",
     },
     {
-      title: "Tên",
+      title: "Customer Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Tên đăng nhập",
+      title: "User Name",
       dataIndex: "user_name",
       key: "user_name",
     },
     {
-      title: "email",
+      title: "Email",
       dataIndex: "email",
       key: "email",
     },
     {
-      title: "cash",
+      title: "Cash",
       key: "cash",
       dataIndex: "cash",
+    },
+    {
+      title:"Last app work",
+      key: "last_active",
+      dataIndex: "last_active",
     },
   ];
   const initFilter = {

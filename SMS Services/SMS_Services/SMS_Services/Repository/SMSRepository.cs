@@ -220,7 +220,7 @@ namespace SMS_Services.Repository
         }
         public async Task<List<Message_Receive>> GetListSMSReceiveAdmin()
         {
-            return _context.Message_Receive.Where(x => !x.is_delete ).OrderByDescending(x => x.id).ToList();
+            return _context.Message_Receive.Where(x => !x.is_delete).OrderByDescending(x => x.id).ToList();
         }
         public async Task<string> Create_SMS_Receive(List<Message_Receive> model)
         {
@@ -295,8 +295,8 @@ namespace SMS_Services.Repository
         #region Customer
         public async Task<Customer> CustomerCreate(Customer model)
         {
-            var customer_db = _context.Customer.AsNoTracking().FirstOrDefault(x=>!x.is_delete && x.user_name == model.user_name && x.email == model.email);
-            if (customer_db!=null)
+            var customer_db = _context.Customer.AsNoTracking().FirstOrDefault(x => !x.is_delete && x.user_name == model.user_name && x.email == model.email);
+            if (customer_db != null)
             {
                 return null;
             }
@@ -328,6 +328,16 @@ namespace SMS_Services.Repository
             }
             List<Customer> lists = listItem.OrderByDescending(r => r.id).ToList();
             return lists;
+        }
+        public async void CustomerPing(long customer_id)
+        {
+            var customer = _context.Customer.FirstOrDefault(x => !x.is_delete && x.id == customer_id);
+            if (customer != null)
+            {
+                customer.last_active = DateTime.Now;
+                _context.Customer.Update(customer);
+                _context.SaveChanges();
+            }
         }
         public int Customer_Authenticate(LoginModel login)
         {

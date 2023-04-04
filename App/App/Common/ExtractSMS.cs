@@ -484,25 +484,6 @@ namespace App.Common
         }
         public List<Message_Receive> ReadSMS(SerialPort port)
         {
-            //port.WriteLine("AT+CMGF=1"); // Set mode to Text(1) or PDU(0)
-            ////Thread.Sleep(1000); // Give a second to write
-            //port.WriteLine("AT+CPMS=\"SM\""); // Set storage to SIM(SM)
-            ////Thread.Sleep(1000);
-            //port.WriteLine("AT+CMGL=\"ALL\""); // What category to read ALL, REC READ, or REC UNREAD
-            ////Thread.Sleep(1000);
-            //port.Write("\r");
-            ////Thread.Sleep(1000);
-            //string response = port.ReadExisting();
-            //if (response.EndsWith("\r\nOK\r\n"))
-            //{
-            //    Console.WriteLine(response);
-            //    // add more code here to manipulate reponse string.
-            //}
-            //else
-            //{
-            //    // add more code here to handle error.
-            //    Console.WriteLine(response);
-            //}
             Console.WriteLine("Reading..");
             port.WriteLine("AT+CMGF=1"); // Set mode to Text(1) or PDU(0)
             Thread.Sleep(1000); // Give a second to write
@@ -582,8 +563,8 @@ namespace App.Common
             }
             Thread.Sleep(2000);
             messages.Add(mess);
-            //messages = messages.Where(x => x.phone_send != "" && x.message != "" && !x.status.Contains("REC READ")).ToList();
-            //DeleteMsg(port);
+            messages = messages.Where(x => x.phone_send != "" && x.message != "" && !x.status.Contains("REC READ")).ToList();
+            DeleteMsg(port);
             return messages;
         }
         #endregion

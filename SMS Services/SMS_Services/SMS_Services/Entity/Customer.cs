@@ -10,6 +10,7 @@
         public int cash { get; set; } = 0;
         public bool active { get; set; } = true;
         public DateTime license_exp { get; set; } = DateTime.Now.AddMonths(3);
+        public DateTime last_active { get; set; } = DateTime.Now;
         public string license_key { get; set; } = string.Empty;
 
     }

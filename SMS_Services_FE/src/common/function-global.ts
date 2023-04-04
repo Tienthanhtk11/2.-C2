@@ -26,15 +26,11 @@ export function getToken() {
 
     const state = store.getState();
     let token = "";
-    console.log('aaaa',state?.infoCurrentUserReducers);
-    console.log('bbbbbbbb',state?.infoCurrentUserAminReducers);
-    if (state?.infoCurrentUserReducers?.token) {
-        console.log('vào1');
+    if (state?.infoCurrentUserReducers?.token) {       
         token = state?.infoCurrentUserReducers?.token;
     }
 
     if (state?.infoCurrentUserAminReducers?.token) {
-        console.log('vào2');
         token = state?.infoCurrentUserAminReducers?.token;
     }
 
@@ -61,7 +57,6 @@ export async function sendRequest_$POST(url: string, { arg }: any) {
     if (state?.infoCurrentUserAminReducers) {
         token = await state?.infoCurrentUserAminReducers?.token;
     }
-    console.log(token);
     return fetch(url, {
         method: 'POST',
         headers: {

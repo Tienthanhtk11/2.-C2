@@ -58,7 +58,7 @@ namespace SMS_Services.Controllers
                         Data = response
                     });
                 }
-              else
+                else
                     return this.RouteToInternalServerError();
             }
             catch (Exception)
@@ -114,6 +114,14 @@ namespace SMS_Services.Controllers
             }
         }
         [AllowAnonymous]
+        [HttpGet("ping")]
+        public async Task<IActionResult> CustomerPing(long customer_id)
+        {
+            _repository.CustomerPing(customer_id);
+            return Ok();
+
+        }
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> CustomerLogin(LoginModel login)
         {
@@ -137,7 +145,7 @@ namespace SMS_Services.Controllers
                         };
                         string tokenString = GenerateToken(claim);
                         customerAuthen.token = tokenString;
-                        customerAuthen.id = user.id; 
+                        customerAuthen.id = user.id;
                         customerAuthen.license_exp = user.license_exp;
                         customerAuthen.license_key = user.license_key;
                         customerAuthen.user_name = user.user_name;
