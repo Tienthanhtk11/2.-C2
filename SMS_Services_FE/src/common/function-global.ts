@@ -47,6 +47,26 @@ export function getToken() {
     return headers;
 }
 
+export async function sendRequest_$GET(url: string, { arg }: any) {
+    const state = store.getState();
+    let token = "";
+
+    if (state?.infoCurrentUserReducers) {
+        token = await state?.infoCurrentUserReducers?.token;
+    }
+    if (state?.infoCurrentUserAminReducers) {
+        token = await state?.infoCurrentUserAminReducers?.token;
+    }
+    return fetch(url, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    }).then(res => res.json())
+}
+
 export async function sendRequest_$POST(url: string, { arg }: any) {
     const state = store.getState();
     let token = "";
