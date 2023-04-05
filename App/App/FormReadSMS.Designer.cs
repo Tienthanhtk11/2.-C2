@@ -59,6 +59,10 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick_1);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;

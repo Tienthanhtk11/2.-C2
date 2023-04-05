@@ -10,7 +10,7 @@ import { userType } from "@/common/enum";
 import useSWRMutation from "swr/mutation";
 
 interface DataType {
-  date_receive: string;
+  date_receive: Date;
   status: number;
   message: number;
   phone_send: number;
@@ -39,6 +39,7 @@ export default function SMS(props: any) {
       title: "Nội dung tin nhắn",
       dataIndex: "message",
       key: "message",
+      render: (text, record, index) => <div className="max-length" >{record.message}</div>
     },
     {
       title: "Thời gian nhận",

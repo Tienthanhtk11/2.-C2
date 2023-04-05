@@ -179,3 +179,9 @@ a {
   color: #1890ff;
 }
 
+.max-length {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 800px;
+}

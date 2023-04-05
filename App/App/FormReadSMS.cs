@@ -90,22 +90,18 @@ namespace App
             timer1.Interval = 5000;
             timer1.Start();
         }
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            string resourcePath = "customer/ping/customer_id=" + customer_id;
-            var client = new RestClient(ServiceUrl);
-            var request = new RestRequest(resourcePath, Method.Get);
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/json");
-            client.Execute(request);
-            timer2.Interval = 60000;
-            timer2.Start();
-        }
-
         private void FormReadSMS_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(Environment.ExitCode);
         }
-
+        private void timer2_Tick_1(object sender, EventArgs e) 
+        {
+            string resourcePath = "customer/ping?customer_id=" + customer_id;
+            var client = new RestClient(ServiceUrl);
+            var request = new RestRequest(resourcePath, Method.Get);
+            var x =client.Execute(request);
+            timer2.Interval = 60000;
+            timer2.Start();
+        }
     }
 }
