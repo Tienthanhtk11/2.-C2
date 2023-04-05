@@ -14,6 +14,7 @@ interface DataType {
   id: number;
   dateAdded: Date;
   last_active: Date;
+  status: string;
 
 }
 
@@ -45,7 +46,12 @@ export default function Customer() {
       dataIndex: "cash",
     },
     {
-      title:"Last app work",
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+    },
+    {
+      title: "Last Connect",
       key: "last_active",
       dataIndex: "last_active",
     },
@@ -63,7 +69,7 @@ export default function Customer() {
     error,
     isLoading,
     mutate,
-  } = useSWR([customer().customer().list(filterTable), getToken()], ([url, token]) => fetcher(url, token));  
+  } = useSWR([customer().customer().list(filterTable), getToken()], ([url, token]) => fetcher(url, token));
   useEffect(() => {
     if (listRes && !error) {
       setListTable(listRes?.data);

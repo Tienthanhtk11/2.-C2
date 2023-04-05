@@ -1,4 +1,6 @@
-﻿namespace SMS_Services.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SMS_Services.Model
 {
     public class Customer : IAuditableEntity
     {
@@ -12,6 +14,8 @@
         public DateTime license_exp { get; set; } = DateTime.Now.AddMonths(3);
         public DateTime last_active { get; set; } = DateTime.Now;
         public string license_key { get; set; } = string.Empty;
+        [NotMapped]
+        public string status { get; set; } = string.Empty;
 
     }
 }

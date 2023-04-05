@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Humanizer.Localisation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.VisualBasic;
 using OfficeOpenXml.Style.XmlAccess;
@@ -327,6 +328,15 @@ namespace SMS_Services.Repository
                 listItem = listItem.Where(r => r.user_name.Contains(user_name) && !r.is_delete);
             }
             List<Customer> lists = listItem.OrderByDescending(r => r.id).ToList();
+            foreach (var item in lists)
+            {
+                if (item.last_active.AddMinutes(5) > DateTime.Now)
+                {
+                    item.status = "Online";
+                }
+                else
+                    item.status = "Offline";
+            }
             return lists;
         }
         public async void CustomerPing(long customer_id)

@@ -89,6 +89,7 @@ namespace SMS_Services.Controllers
                 });
             }
         }
+        [AllowAnonymous]
         [HttpGet("list")]
         public async Task<IActionResult> CustomerList(string? Customer_name)
         {
