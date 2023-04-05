@@ -27,7 +27,6 @@ type ContainerProps = {
 export default function Admin() {
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedMenuItem, setSelectedMenuItem] = useState("2");
   const [getListMenu, setListMenu] = useState([]);
   const [getTypeUser, setTypeUser] = useState('');  
   const {
@@ -46,6 +45,8 @@ export default function Admin() {
   );
 
   const [getDefaultSelectedKeys, setDefaultSelectedKeys] = useState(getStore.typeuser == userType.admin ? '2' : '4');
+  const [selectedMenuItem, setSelectedMenuItem] = useState(getStore.typeuser == userType.admin ? '2' : '4');
+
 
   const dispatch = useDispatch();
 
@@ -144,7 +145,6 @@ export default function Admin() {
           mode="inline"
           defaultSelectedKeys={[`${getDefaultSelectedKeys}`]}
           onClick={(e) => {
-            console.log(e.key);
             setSelectedMenuItem(e.key)
           }}
           items={getListMenu}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { sms } from "@/services/sms";
 import { fetcher } from "@/common/const";
 import { getToken, sendRequest_$GET } from "@/common/function-global";
@@ -47,6 +47,8 @@ export default function SMS(props: any) {
     }
   ];
 
+  const { mutate } = useSWRConfig();
+
   // get user admin
   const getStore = useSelector(
     (state: any) => {
@@ -59,49 +61,37 @@ export default function SMS(props: any) {
   );
 
   const [lstTable, setListTable] = useState([]);
-
-  // const {
-  //   data: listResAdmin,
-  //   error: errorResAdmin,
-  //   mutate: mutateAdmin,
-  // } = useSWR([sms().list_admin(), getToken()], ([url, token]) => fetcher(url, token));
-
-  // const {
-  //   data: listResCustomer,
-  //   error: errorResCustomer,
-  //   mutate: mutateCustomer,
-  // } = useSWR([sms().list(), getToken()], ([url, token]) => fetcher(url, token));
+  const [getaaa, setaaa] = useState('');
+  const [getbbb, setbbb] = useState('');
 
   const {
-    trigger: triggerAdmin,
     data: listResAdmin,
     error: errorResAdmin,
-  } = useSWRMutation(sms().list_admin(), sendRequest_$GET);
+    mutate: mutateAdmin,
+  } = useSWR([getaaa, getToken()], ([url, token]) => fetcher(url, token));
 
   const {
-    trigger: triggerCustomer,
     data: listResCustomer,
     error: errorResCustomer,
-  } = useSWRMutation(sms().list(), sendRequest_$GET);
+    mutate: mutateCustomer,
+  } = useSWR([getbbb, getToken()], ([url, token]) => fetcher(url, token));
 
   useEffect(() => {
-    // if (listResAdmin && !errorResAdmin) {
-    //   setListTable(listResAdmin.data);
-    // }
-    // if (listResCustomer && !errorResCustomer) {
-    //   setListTable(listResCustomer.data);
-    // }
     if (getStore.typeuser == userType.admin) {
-      if (listResAdmin && !errorResAdmin) {
-        triggerAdmin();
-        setListTable(listResAdmin.data);
-      }
+      // mutateAdmin(`${sms().list_admin()}`)
+      setaaa(`${sms().list_admin()}`)
     }
     else {
-      if (listResCustomer && !errorResCustomer) {
-        triggerCustomer()
-        setListTable(listResCustomer.data);
-      }
+      setbbb(`${sms().list()}`)
+    }
+  }, []);
+
+  useEffect(() => {
+    if (listResAdmin && !errorResAdmin) {
+      setListTable(listResAdmin.data);
+    }
+    if (listResCustomer && !errorResCustomer) {
+      setListTable(listResCustomer.data);
     }
   }, [errorResAdmin, listResAdmin, errorResCustomer, listResCustomer]);
 
