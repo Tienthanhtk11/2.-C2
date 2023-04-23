@@ -27,6 +27,7 @@ namespace App
                     password = textBox2.Text,
                 };
                 string ServiceUrl = "http://103.120.242.146:8088/api/";
+                //string ServiceUrl = "https://localhost:7067/api/";
                 try
                 {
                     string resourcePath = "customer/login";
@@ -44,10 +45,11 @@ namespace App
                     }
                     else
                     {
-                        MessageBox.Show("Login Susscess, Your license exp: " + response_token.Data.license_exp);
-                        FormReadSMS form = new FormReadSMS();
-                        form.label1.Text = "Reading... \r\nYour new mesage show below.";
-                        form.label2.Text = response_token.Data.id.ToString();
+                        //FormConfigWarning formConfigWarning = new FormConfigWarning(response_token.Data.id);
+                        //this.Hide();
+                        //formConfigWarning.ShowDialog();
+                        //this.Close(); 
+                        FormRequestSMS form  = new FormRequestSMS(response_token.Data.id);
                         this.Hide();
                         form.ShowDialog();
                         this.Close();
@@ -59,16 +61,15 @@ namespace App
                 }
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             FormRegister form = new FormRegister();
             form.ShowDialog();
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
     public class Login

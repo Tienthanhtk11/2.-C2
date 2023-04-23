@@ -110,7 +110,7 @@ namespace App
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -128,7 +128,7 @@ namespace App
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -147,7 +147,7 @@ namespace App
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer2.Size = new System.Drawing.Size(555, 828);
-            this.splitContainer2.SplitterDistance = 168;
+            this.splitContainer2.SplitterDistance = 166;
             this.splitContainer2.TabIndex = 0;
             // 
             // button1
@@ -155,7 +155,7 @@ namespace App
             this.button1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(429, 105);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(107, 30);
             this.button1.TabIndex = 7;
@@ -166,7 +166,7 @@ namespace App
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(379, 66);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(157, 22);
@@ -185,7 +185,7 @@ namespace App
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(111, 108);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(172, 22);
             this.textBox2.TabIndex = 4;
@@ -203,7 +203,7 @@ namespace App
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(111, 66);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(172, 22);
@@ -224,7 +224,7 @@ namespace App
             this.bt_refresh.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.bt_refresh.ForeColor = System.Drawing.Color.Black;
             this.bt_refresh.Location = new System.Drawing.Point(13, 12);
-            this.bt_refresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_refresh.Margin = new System.Windows.Forms.Padding(4);
             this.bt_refresh.Name = "bt_refresh";
             this.bt_refresh.Size = new System.Drawing.Size(107, 38);
             this.bt_refresh.TabIndex = 0;
@@ -245,11 +245,11 @@ namespace App
             this.Cash});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(555, 656);
+            this.dataGridView1.Size = new System.Drawing.Size(555, 658);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -290,7 +290,7 @@ namespace App
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer3.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -309,7 +309,7 @@ namespace App
             // 
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer4.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer4.Name = "splitContainer4";
             this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -336,7 +336,7 @@ namespace App
             this.button4.BackColor = System.Drawing.Color.White;
             this.button4.ForeColor = System.Drawing.Color.Black;
             this.button4.Location = new System.Drawing.Point(974, 127);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(128, 30);
             this.button4.TabIndex = 18;
@@ -349,7 +349,7 @@ namespace App
             this.button3.BackColor = System.Drawing.Color.White;
             this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.Location = new System.Drawing.Point(1017, 5);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(91, 30);
             this.button3.TabIndex = 17;
@@ -363,7 +363,7 @@ namespace App
             this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.Image = global::App.Properties.Resources.plus_x16;
             this.button2.Location = new System.Drawing.Point(1056, 39);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(45, 38);
             this.button2.TabIndex = 16;
@@ -383,7 +383,7 @@ namespace App
             // tb_receive_phone
             // 
             this.tb_receive_phone.Location = new System.Drawing.Point(702, 38);
-            this.tb_receive_phone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_receive_phone.Margin = new System.Windows.Forms.Padding(4);
             this.tb_receive_phone.Multiline = true;
             this.tb_receive_phone.Name = "tb_receive_phone";
             this.tb_receive_phone.Size = new System.Drawing.Size(312, 80);
@@ -404,7 +404,7 @@ namespace App
             // tb_message
             // 
             this.tb_message.Location = new System.Drawing.Point(148, 38);
-            this.tb_message.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_message.Margin = new System.Windows.Forms.Padding(4);
             this.tb_message.Multiline = true;
             this.tb_message.Name = "tb_message";
             this.tb_message.Size = new System.Drawing.Size(418, 80);
@@ -436,7 +436,7 @@ namespace App
             this.colum1});
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowTemplate.Height = 25;
@@ -481,7 +481,7 @@ namespace App
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(3, 4);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1233, 373);
@@ -491,9 +491,9 @@ namespace App
             // 
             this.tabPage1.Controls.Add(this.dataGridView3);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(1225, 344);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tin nhắn đã gửi";
@@ -514,7 +514,7 @@ namespace App
             this.Column2});
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView3.Location = new System.Drawing.Point(4, 4);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView3.MultiSelect = false;
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
@@ -585,11 +585,11 @@ namespace App
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1225, 344);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1225, 347);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tin nhắn đã nhận";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -607,11 +607,11 @@ namespace App
             this.dataGridViewTextBoxColumn14});
             this.dataGridView4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView4.Location = new System.Drawing.Point(4, 4);
-            this.dataGridView4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView4.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.ReadOnly = true;
             this.dataGridView4.RowTemplate.Height = 25;
-            this.dataGridView4.Size = new System.Drawing.Size(1217, 336);
+            this.dataGridView4.Size = new System.Drawing.Size(1217, 339);
             this.dataGridView4.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn10
@@ -662,7 +662,7 @@ namespace App
             this.ClientSize = new System.Drawing.Size(1674, 828);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

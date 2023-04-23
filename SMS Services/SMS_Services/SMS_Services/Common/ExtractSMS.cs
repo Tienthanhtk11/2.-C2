@@ -342,7 +342,27 @@ namespace SMS_Services.Common
                 return "UNKNOW";
         }
         //AT+CSCA="+84900000022",145
+        public bool sendMsg2(SerialPort serialPort, string PhoneNo, string Message, int timeout)
+        {
+            try
+            {
+                serialPort.WriteLine(@"AT" + (char)(13));
+                Thread.Sleep(200);
+                serialPort.WriteLine("AT+CMGF=1" + (char)(13));
+                Thread.Sleep(200);
+                serialPort.WriteLine(@"AT+CMGS=""" + PhoneNo + @"""" + (char)(13));
+                Thread.Sleep(200);
+                serialPort.WriteLine(Message + (char)(26));
 
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                Debug.Write(ex.Message);
+                return false;
+            }
+        }
         public bool sendMsg(SerialPort port, string PhoneNo, string Message, int timeout)
         {
             bool isSend = false;
@@ -485,25 +505,7 @@ namespace SMS_Services.Common
         }
         public List<Message_Receive> ReadSMS(SerialPort port)
         {
-            //port.WriteLine("AT+CMGF=1"); // Set mode to Text(1) or PDU(0)
-            ////Thread.Sleep(1000); // Give a second to write
-            //port.WriteLine("AT+CPMS=\"SM\""); // Set storage to SIM(SM)
-            ////Thread.Sleep(1000);
-            //port.WriteLine("AT+CMGL=\"ALL\""); // What category to read ALL, REC READ, or REC UNREAD
-            ////Thread.Sleep(1000);
-            //port.Write("\r");
-            ////Thread.Sleep(1000);
-            //string response = port.ReadExisting();
-            //if (response.EndsWith("\r\nOK\r\n"))
-            //{
-            //    Console.WriteLine(response);
-            //    // add more code here to manipulate reponse string.
-            //}
-            //else
-            //{
-            //    // add more code here to handle error.
-            //    Console.WriteLine(response);
-            //}
+           
             Console.WriteLine("Reading..");
             port.WriteLine("AT+CMGF=1"); // Set mode to Text(1) or PDU(0)
             Thread.Sleep(1000); // Give a second to write

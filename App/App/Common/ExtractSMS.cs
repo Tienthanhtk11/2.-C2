@@ -347,18 +347,51 @@ namespace App.Common
         }
         //AT+CSCA="+84900000022",145
 
+        public bool sendMsg2(SerialPort serialPort, string PhoneNo, string Message, int timeout)
+        {
+            try
+            {
+                serialPort.WriteLine(@"AT" + (char)(13));
+                Thread.Sleep(200);
+                serialPort.WriteLine("AT+CMGF=1" + (char)(13));
+                Thread.Sleep(200);
+                serialPort.WriteLine(@"AT+CMGS=""" + PhoneNo + @"""" + (char)(13));
+                Thread.Sleep(200);
+                serialPort.WriteLine(Message + (char)(26));
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                Debug.Write(ex.Message);
+                return false;
+            }
+        }
         public bool sendMsg(SerialPort port, string PhoneNo, string Message, int timeout)
         {
             bool isSend = false;
             try
             {
                 string recievedData = ExecCommand(port, "AT", 300, "No phone connected");
+                Console.WriteLine(recievedData);
+
                 recievedData = ExecCommand(port, "AT+CMGF=1", 300, "Failed to set message format.");
+                Console.WriteLine(recievedData);
+
                 Thread.Sleep(1000);
-                String command = "AT+CMGS=\"" + PhoneNo + "\"";
+
+                string command = "AT+CMGS=\"" + PhoneNo + "\"";
+                Console.WriteLine(command);
+
                 recievedData = ExecCommand(port, command, 300, "Failed to accept phoneNo");
+                Console.WriteLine(recievedData);
+
                 Thread.Sleep(1000);
+
                 command = Message + char.ConvertFromUtf32(26) + "\r";
+                Console.WriteLine(command);
+
                 recievedData = ExecCommand(port, command, timeout, "Failed to send message"); //3 seconds
                 Console.WriteLine(recievedData);
                 if (recievedData.EndsWith("\r\nOK\r\n"))

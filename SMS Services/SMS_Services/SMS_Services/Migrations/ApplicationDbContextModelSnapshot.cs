@@ -22,6 +22,49 @@ namespace SMS_Services.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("SMS_Services.Entity.Config_Port", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
+
+                    b.Property<long>("Customer_Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Mobile_Carrier")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone_Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Port_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("dateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("dateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("is_delete")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("userAdded")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("userUpdated")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Config_Port");
+                });
+
             modelBuilder.Entity("SMS_Services.Model.Admin_User", b =>
                 {
                     b.Property<long>("id")
@@ -142,6 +185,10 @@ namespace SMS_Services.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"), 1L, 1);
 
+                    b.Property<string>("computer_name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("dateAdded")
                         .HasColumnType("datetime2");
 
@@ -164,6 +211,10 @@ namespace SMS_Services.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phone_send")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("port_name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

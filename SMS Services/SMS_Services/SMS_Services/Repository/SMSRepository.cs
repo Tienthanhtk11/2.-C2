@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.VisualBasic;
 using OfficeOpenXml.Style.XmlAccess;
 using SMS_Services.Common;
+using SMS_Services.Entity;
 using SMS_Services.Model;
 using System.IO.Ports;
 using System.ServiceModel.Description;
@@ -339,6 +340,24 @@ namespace SMS_Services.Repository
             }
             return lists;
         }
+        public async Task<SMS_Request_Customer> GetSMSRequest(long customer_id)
+        {
+            var sms = _context.SMS_Request_Customer.FirstOrDefault(x => x.customer_id == customer_id && x.status == 0);
+            sms.status = 1;
+            _context.SMS_Request_Customer.Update(sms);
+            _context.SaveChanges();
+            return sms;
+        }
+        public async Task<List<SMS_Template>> ListSMSTemplate(long customer_id)
+        {
+            var list_temp = _context.SMS_Template.Where(x=>x.customer_id==customer_id ).OrderByDescending(x => x.id).ToList();
+            return list_temp;
+        }
+        public async Task<List<SMS_Request_Customer>> ListSMSRequest(long customer_id)
+        {
+            var list_temp = _context.SMS_Request_Customer.Where(x=>x.customer_id==customer_id ).OrderByDescending (x=>x.id).ToList();
+            return list_temp;
+        }
         public async void CustomerPing(long customer_id)
         {
             var customer = _context.Customer.FirstOrDefault(x => !x.is_delete && x.id == customer_id);
@@ -426,7 +445,48 @@ namespace SMS_Services.Repository
         {
             return _context.Customer.Where(r => r.user_name.ToUpper() == user_name.ToUpper() || r.email.ToUpper() == user_name.ToUpper() && !r.is_delete).FirstOrDefault();
         }
-
+        public async Task<Config_Port> Config_Port_Create(Config_Port model)
+        {
+            var port_db = _context.Config_Port.Where(x => x.Phone_Number == model.Phone_Number || x.Port_Name == model.Port_Name && x.Customer_Id == model.Customer_Id).ToList();
+            _context.Config_Port.RemoveRange(port_db);
+            _context.Config_Port.Add(model);
+            _context.SaveChanges();
+            return model;
+        }
+        public async Task<Config_Port> Config_Port_Modify(Config_Port model)
+        {
+            _context.Config_Port.Update(model);
+            _context.SaveChanges();
+            return model;
+        }
+        public async Task<List<Config_Port>> Config_Port_List(long customer_id)
+        {
+            return _context.Config_Port.Where(x => x.Customer_Id == customer_id).ToList();
+        }
+        #endregion
+        #region Request SMS
+        public async Task<bool> Request(Data_Upload data)
+        {
+            Random rnd = new Random();
+            _context.SMS_Template.AddRange(data.list_sms_template);
+            _context.SaveChanges();
+            List<SMS_Request_Customer> list_sms = new();
+            foreach (var item in data.list_phone_number)
+            {
+                SMS_Request_Customer sms = new()
+                {
+                    phone_receive = item.phone_number,
+                    telco = item.phone_number
+                };
+                int sms_index = rnd.Next(1, data.list_sms_template.Count());
+                sms.message = data.list_sms_template[sms_index].message;
+                sms.template_id = data.list_sms_template[sms_index].id;
+                list_sms.Add(sms);
+            }
+            _context.SMS_Request_Customer.AddRange(list_sms);
+            _context.SaveChanges();
+            return true;
+        }
         #endregion
     }
 }

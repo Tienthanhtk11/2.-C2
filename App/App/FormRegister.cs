@@ -34,6 +34,7 @@ namespace App
             };
             string resourcePath = "customer/register";
             string ServiceUrl = "http://103.120.242.146:8088/api/";
+            //string ServiceUrl = "https://localhost:7067/api/";
             var body = JsonConvert.SerializeObject(customer_resign);
             var client = new RestClient(ServiceUrl);
             var request = new RestRequest(resourcePath, Method.Post);

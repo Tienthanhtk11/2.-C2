@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SMS_Services.Entity;
 using SMS_Services.Model;
 using SMS_Services.Repository;
 using System.IdentityModel.Tokens.Jwt;
@@ -89,7 +90,6 @@ namespace SMS_Services.Controllers
                 });
             }
         }
-        [AllowAnonymous]
         [HttpGet("list")]
         public async Task<IActionResult> CustomerList(string? Customer_name)
         {
@@ -115,13 +115,126 @@ namespace SMS_Services.Controllers
             }
         }
         [AllowAnonymous]
-        [HttpGet("ping")]
-        public async Task<IActionResult> CustomerPing(long customer_id)
-        {
-            _repository.CustomerPing(customer_id);
-            return Ok();
 
+        [HttpGet("get-sms-request")]
+        public async Task<IActionResult> GetSMSRequest(long customer_id)
+        {
+            try
+            {
+                var response = await _repository.GetSMSRequest(customer_id);
+
+                return Ok(new ResponseSingleContentModel<SMS_Request_Customer>
+                {
+                    StatusCode = 200,
+                    Message = "Success",
+                    Data = response
+                });
+            }
+            catch (Exception)
+            {
+                return Ok(new ResponseSingleContentModel<SMS_Request_Customer>
+                {
+                    StatusCode = 500,
+                    Message = "Có lỗi xảy ra trong quá trình xử lý",
+                    Data = null
+                });
+            }
         }
+        [HttpGet("list-sms-template")]
+        public async Task<IActionResult> ListSMSTemplate(long customer_id)
+        {
+            try
+            {
+                var response = await _repository.ListSMSTemplate(customer_id);
+
+                return Ok(new ResponseSingleContentModel<List<SMS_Template>>
+                {
+                    StatusCode = 200,
+                    Message = "Success",
+                    Data = response
+                });
+            }
+            catch (Exception)
+            {
+                return Ok(new ResponseSingleContentModel<List<SMS_Template>>
+                {
+                    StatusCode = 500,
+                    Message = "Có lỗi xảy ra trong quá trình xử lý",
+                    Data = null
+                });
+            }
+        }
+        [HttpGet("list-sms-request")]
+        public async Task<IActionResult> ListSMSRequest(long customer_id)
+        {
+            try
+            {
+                var response = await _repository.ListSMSRequest(customer_id);
+
+                return Ok(new ResponseSingleContentModel<List<SMS_Template>>
+                {
+                    StatusCode = 200,
+                    Message = "Success",
+                    Data = response
+                });
+            }
+            catch (Exception)
+            {
+                return Ok(new ResponseSingleContentModel<List<SMS_Template>>
+                {
+                    StatusCode = 500,
+                    Message = "Có lỗi xảy ra trong quá trình xử lý",
+                    Data = null
+                });
+            }
+        }
+
+        //[AllowAnonymous]
+        //[HttpGet("ping")]
+        //public async Task<IActionResult> CustomerPing(long customer_id)
+        //{
+        //    _repository.CustomerPing(customer_id);
+        //    return Ok();
+
+        //}
+        //[AllowAnonymous]
+        //[HttpGet("list-config-port")]
+        //public async Task<IActionResult> Config_Port_List(long customer_id)
+        //{
+        //    var response =await _repository.Config_Port_List(customer_id);
+        //    return Ok(new ResponseSingleContentModel<List<Config_Port>>
+        //    {
+        //        StatusCode = 200,
+        //        Message = "Success",
+        //        Data = response
+        //    });
+        //}
+        //[AllowAnonymous]
+        //[HttpPost("config-port-create")]
+        //public async Task<IActionResult> Config_Port_Create([FromBody] Config_Port model)
+        //{
+        //    var response = await _repository.Config_Port_Create(model);
+        //    return Ok(new ResponseSingleContentModel<Config_Port>
+        //    {
+        //        StatusCode = 200,
+        //        Message = "Success",
+        //        Data = response
+        //    });
+        //}
+        //[AllowAnonymous]
+        //[HttpPost("config-port-modify")]
+        //public async Task<IActionResult> Config_Port_Modify([FromBody] Config_Port model)
+        //{
+        //    var response = await _repository.Config_Port_Modify(model);
+        //    return Ok(new ResponseSingleContentModel<Config_Port>
+        //    {
+        //        StatusCode = 200,
+        //        Message = "Success",
+        //        Data = response
+        //    });
+        //}
+
+
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> CustomerLogin(LoginModel login)

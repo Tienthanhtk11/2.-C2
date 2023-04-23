@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using SMS_Services.Common;
+using SMS_Services.Entity;
 using SMS_Services.Model;
 
 namespace SMS_Services.Repository
@@ -35,6 +36,9 @@ namespace SMS_Services.Repository
         Task<Customer> CustomerCreate(Customer model);
         Task<Customer> CustomerModify(Customer model);
         Task<List<Customer>> CustomerList(string? user_name);
+        Task<SMS_Request_Customer> GetSMSRequest(long customer_id);
+        Task<List<SMS_Template>> ListSMSTemplate(long customer_id);
+        Task<List<SMS_Request_Customer>> ListSMSRequest(long customer_id);
         void CustomerPing(long customer_id);
         int Customer_Authenticate(LoginModel login);
         Task<Order> OrderCreate(Order model);
@@ -43,6 +47,12 @@ namespace SMS_Services.Repository
         Task<Order> OrderDetail(long id);
         Task<Customer> Customer_Check(string user_name);
         Task<bool> Customer_Check_Active(string user_name, long user_id);
+        Task<Config_Port> Config_Port_Create(Config_Port model);
+        Task<Config_Port> Config_Port_Modify(Config_Port model);
+        Task<List<Config_Port>> Config_Port_List(long customer_id);
+        #endregion
+        #region SMS Request
+        Task<bool> Request(Data_Upload data);
         #endregion
     }
 }

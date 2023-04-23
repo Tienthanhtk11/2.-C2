@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OfficeOpenXml;
+using SMS_Services.Entity;
 using SMS_Services.Model;
 using SMS_Services.Repository;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace SMS_Services.Controllers
         }
         [AllowAnonymous]
         [HttpPost("create-list-sms-receive")]
-        public async Task<IActionResult> Create_SMS_Receive(List<Message_Receive> model)
+        public async Task<IActionResult> Create_SMS_Receive([FromBody] List<Message_Receive> model)
         {
             return Ok(_repository.Create_SMS_Receive(model));
         }
@@ -187,6 +188,37 @@ namespace SMS_Services.Controllers
         }
         #endregion
 
+        #region test
+        [AllowAnonymous]
+        [HttpPost("request")]
+        public async Task<IActionResult> Request([FromBody] Data_Upload data)
+        {
 
+            try
+            {
+                var response = await this._repository.Request(data);
+                if (response)
+                {
+                    return Ok(new ResponseSingleContentModel<bool>
+                    {
+                        StatusCode = 200,
+                        Message = "",
+                        Data = response
+                    });
+                }
+                else
+                    return Ok(new ResponseSingleContentModel<bool>
+                    {
+                        StatusCode = 500,
+                        Message = "",
+                        Data = response
+                    });
+            }
+            catch (Exception)
+            {
+                return this.RouteToInternalServerError();
+            }
+        }
+        #endregion
     }
 }
