@@ -126,10 +126,14 @@ namespace App
         }
         private void FormConfigPort_FormClosed(object sender, FormClosedEventArgs e)
         {
-            FormReadSMS readSMS = new FormReadSMS(list_port, customer_id, config_mode);
+            FormMain2 readSMS = new FormMain2(list_port, customer_id, config_mode);
             this.Hide();
             readSMS.ShowDialog();
             this.Close();
+            //FormReadSMS readSMS = new FormReadSMS(list_port, customer_id, config_mode);
+            //this.Hide();
+            //readSMS.ShowDialog();
+            //this.Close();
         }
     }
 }

@@ -45,14 +45,14 @@ namespace App
                     }
                     else
                     {
-                        //FormConfigWarning formConfigWarning = new FormConfigWarning(response_token.Data.id);
-                        //this.Hide();
-                        //formConfigWarning.ShowDialog();
-                        //this.Close(); 
-                        FormRequestSMS form  = new FormRequestSMS(response_token.Data.id);
+                        FormConfigWarning formConfigWarning = new FormConfigWarning(response_token.Data.id);
                         this.Hide();
-                        form.ShowDialog();
+                        formConfigWarning.ShowDialog();
                         this.Close();
+                        //FormMain form  = new FormMain();
+                        //this.Hide();
+                        //form.ShowDialog();
+                        //this.Close();
                     }
                 }
                 catch (Exception ex)

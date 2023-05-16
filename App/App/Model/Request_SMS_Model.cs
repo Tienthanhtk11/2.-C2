@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace App.Model
 {
@@ -35,5 +36,6 @@ namespace App.Model
         public int sum_sms { get; set; } = 1;
         public int status { get; set; } = 0;
         public string system_response { get; set; } = "";
+        public DateTime dateAdded { get; set; } = DateTime.Now;
     }
 }

@@ -18,6 +18,8 @@ namespace SMS_Services.Model
         public virtual DbSet<Config_Port> Config_Port { set; get; }
         public virtual DbSet<SMS_Template> SMS_Template { set; get; }
         public virtual DbSet<SMS_Request_Customer> SMS_Request_Customer { set; get; }
+        public virtual DbSet<Customer_Config_Phone_Number> Customer_Config_Phone_Number { set; get; }
+        public virtual DbSet<Phone> Phone { set; get; }
 
     }
 }

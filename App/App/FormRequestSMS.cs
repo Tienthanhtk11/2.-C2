@@ -22,28 +22,32 @@ namespace App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string ServiceUrl = "https://localhost:7067/api/SMS/";
+            string ServiceUrl = "http://103.120.242.146:8088/api/";
             try
             {
 
                 Data_Upload data = new Data_Upload();
                 foreach (DataRow row in list_phone.Tables[0].Rows)
                 {
-                    Phone_Number phone = new Phone_Number();
-                    phone.phone_number = row[0].ToString();
-                    phone.telco = row[1].ToString();
+                    Phone_Number phone = new Phone_Number
+                    {
+                        phone_number = row[1].ToString(),
+                        telco = row[2].ToString(),
+                        customer_id = customer_id
+                    };
                     data.list_phone_number.Add(phone);
                 }
                 foreach (DataRow row in list_message.Tables[0].Rows)
                 {
                     SMS_Template sms_Template = new SMS_Template
                     {
-                        message = row[0].ToString()
+                        customer_id = customer_id,
+                        message = row[1].ToString()
                     };
                     data.list_sms_template.Add(sms_Template);
                 }
-               
-                string resourcePath = "request";
+
+                string resourcePath = "SMS/request";
                 var body = JsonConvert.SerializeObject(data);
                 var client = new RestClient(ServiceUrl);
                 var request = new RestRequest(resourcePath, Method.Post);
@@ -52,7 +56,11 @@ namespace App
                 request.AddJsonBody(body);
                 var response = client.Execute(request);
                 var response_token = JsonConvert.DeserializeObject<ResponseSingleContentModel<string>>(response.Content ?? "");
-                MessageBox.Show(response_token.ToString());
+                if (response_token.StatusCode == 200)
+                    MessageBox.Show("Success upload data to server!");
+                else
+                    MessageBox.Show("Send data to server false!, Please try again ");
+
             }
             catch (Exception ex)
             {
@@ -131,7 +139,11 @@ namespace App
             form.ShowDialog();
         }
 
+        private void FormRequestSMS_Load(object sender, EventArgs e)
+        {
+
+        }
     }
-    
+
 }
 

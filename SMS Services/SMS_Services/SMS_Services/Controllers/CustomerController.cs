@@ -14,10 +14,10 @@ namespace SMS_Services.Controllers
     [ApiController]
     public class CustomerController : BaseController
     {
-        private readonly ISMSRepository _repository;
+        private readonly ICustomerRepository _repository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _config;
-        public CustomerController(ISMSRepository Repository, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
+        public CustomerController(ICustomerRepository Repository, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             this._config = configuration;
             this._repository = Repository;
@@ -164,14 +164,14 @@ namespace SMS_Services.Controllers
                 });
             }
         }
+        [AllowAnonymous]
         [HttpGet("list-sms-request")]
         public async Task<IActionResult> ListSMSRequest(long customer_id)
         {
             try
             {
                 var response = await _repository.ListSMSRequest(customer_id);
-
-                return Ok(new ResponseSingleContentModel<List<SMS_Template>>
+                return Ok(new ResponseSingleContentModel<List<SMS_Request_Customer>>
                 {
                     StatusCode = 200,
                     Message = "Success",
@@ -197,44 +197,69 @@ namespace SMS_Services.Controllers
         //    return Ok();
 
         //}
-        //[AllowAnonymous]
-        //[HttpGet("list-config-port")]
-        //public async Task<IActionResult> Config_Port_List(long customer_id)
-        //{
-        //    var response =await _repository.Config_Port_List(customer_id);
-        //    return Ok(new ResponseSingleContentModel<List<Config_Port>>
-        //    {
-        //        StatusCode = 200,
-        //        Message = "Success",
-        //        Data = response
-        //    });
-        //}
-        //[AllowAnonymous]
-        //[HttpPost("config-port-create")]
-        //public async Task<IActionResult> Config_Port_Create([FromBody] Config_Port model)
-        //{
-        //    var response = await _repository.Config_Port_Create(model);
-        //    return Ok(new ResponseSingleContentModel<Config_Port>
-        //    {
-        //        StatusCode = 200,
-        //        Message = "Success",
-        //        Data = response
-        //    });
-        //}
-        //[AllowAnonymous]
-        //[HttpPost("config-port-modify")]
-        //public async Task<IActionResult> Config_Port_Modify([FromBody] Config_Port model)
-        //{
-        //    var response = await _repository.Config_Port_Modify(model);
-        //    return Ok(new ResponseSingleContentModel<Config_Port>
-        //    {
-        //        StatusCode = 200,
-        //        Message = "Success",
-        //        Data = response
-        //    });
-        //}
+        [AllowAnonymous]
+        [HttpGet("list-config-port")]
+        public async Task<IActionResult> Config_Port_List(long customer_id)
+        {
+            var response = await _repository.Config_Port_List(customer_id);
+            return Ok(new ResponseSingleContentModel<List<Config_Port>>
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = response
+            });
+        }
+        [AllowAnonymous]
+        [HttpPost("config-port-create")]
+        public async Task<IActionResult> Config_Port_Create([FromBody] Config_Port model)
+        {
+            var response = await _repository.Config_Port_Create(model);
+            return Ok(new ResponseSingleContentModel<Config_Port>
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = response
+            });
+        }
+        [AllowAnonymous]
+        [HttpPost("config-port-modify")]
+        public async Task<IActionResult> Config_Port_Modify([FromBody] Config_Port model)
+        {
+            var response = await _repository.Config_Port_Modify(model);
+            return Ok(new ResponseSingleContentModel<Config_Port>
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = response
+            });
+        }
 
 
+        [AllowAnonymous]
+        [HttpPost("create-sms-request")]
+        public async Task<IActionResult> CreateSMSRequest([FromBody] List<SMS_Request_Customer> model)
+        {
+            try
+            {
+
+                var response = await _repository.CreateSMSRequest(model);
+                return Ok(new ResponseSingleContentModel<bool>
+                {
+                    StatusCode = 200,
+                    Message = "Success",
+                    Data = response
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseSingleContentModel<string>
+                {
+                    StatusCode = 500,
+                    Message = "Có lỗi xảy ra trong quá trình xử lý",
+                    Data = string.Empty
+                });
+            }
+        }
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> CustomerLogin(LoginModel login)

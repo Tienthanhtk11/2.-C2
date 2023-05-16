@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="App.exe" size="127432">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="App.exe" size="147400">
       <assemblyIdentity name="App" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>koK2oO/J+daU7wkYiwiOwafamIfSzZt4UPkl6pbqC7g=</dsig:DigestValue>
+        <dsig:DigestValue>oboHC+gB0l68oXH7vFygz23GOzAIXvPLKV0+AbsHHVI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -293,13 +293,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="App.exe.config" size="1383">
+  <file name="App.exe.config" size="1376">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>hImoxgSGvTb36W5iJxWuIxUYyvpR0YwI9PpyqM3f0z8=</dsig:DigestValue>
+      <dsig:DigestValue>3HB5AziDI8DdYLt1371L1X6gK+o5oky/ZdZE6Cgi7mM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Icon\plus.png" size="14613">

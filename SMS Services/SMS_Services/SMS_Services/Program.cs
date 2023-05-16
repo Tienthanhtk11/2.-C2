@@ -11,7 +11,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 var contexOptions = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(connectionString).Options;
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connectionString));
 
+var androidconnectionString = builder.Configuration.GetConnectionString("AndroidConnection");
+var androidcontexOptions = new DbContextOptionsBuilder<AndroidDBContext>().UseSqlServer(androidconnectionString).Options;
+builder.Services.AddDbContext<AndroidDBContext>(x => x.UseSqlServer(androidconnectionString));
+
 builder.Services.AddTransient<ISMSRepository, SMSRepository>();
+builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -19,6 +24,7 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddHostedService<SendSMS_Cronjob_Services>();
 //builder.Services.AddHostedService<ReadSMS_Cronjob_Services>();
+//builder.Services.AddHostedService<ReadSMS_From_Android>();
 
 string issuer = builder.Configuration["TokenSettings:Issuer"].ToString();
 string audience = builder.Configuration["TokenSettings:Audience"].ToString();

@@ -16,10 +16,14 @@ namespace App
         public static long customer_id = 0;
         private void button2_Click(object sender, EventArgs e)
         {
-            FormReadSMS readSMS = new FormReadSMS(list_port, customer_id, "false");
+            FormMain2 readSMS = new FormMain2(list_port, customer_id, "false");
             this.Hide();
             readSMS.ShowDialog();
             this.Close();
+            //FormReadSMS readSMS = new FormReadSMS(list_port, customer_id, "false");
+            //this.Hide();
+            //readSMS.ShowDialog();
+            //this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,6 +32,10 @@ namespace App
             this.Hide();
             formConfigPort.ShowDialog();
             this.Close();
+            //FormConfigPort formConfigPort = new FormConfigPort(list_port, customer_id, "true");
+            //this.Hide();
+            //formConfigPort.ShowDialog();
+            //this.Close();
         }
     }
 }

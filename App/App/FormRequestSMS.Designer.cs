@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -56,7 +55,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(1102, 17);
+            this.button1.Location = new System.Drawing.Point(1503, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 41);
             this.button1.TabIndex = 0;
@@ -73,7 +72,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.button4);
             this.splitContainer1.Panel1.Controls.Add(this.button3);
             this.splitContainer1.Panel1.Controls.Add(this.button2);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
@@ -85,21 +83,10 @@
             this.splitContainer1.SplitterDistance = 78;
             this.splitContainer1.TabIndex = 1;
             // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button4.Location = new System.Drawing.Point(1512, 17);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(124, 41);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Start Send SMS";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button3.Location = new System.Drawing.Point(572, 21);
+            this.button3.Location = new System.Drawing.Point(563, 25);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(157, 32);
             this.button3.TabIndex = 2;
@@ -203,6 +190,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "FormRequestSMS";
             this.Text = "Config SMS template and list Phone Number";
+            this.Load += new System.EventHandler(this.FormRequestSMS_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -231,6 +219,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn STT;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn TelCo;
-        private System.Windows.Forms.Button button4;
     }
 }

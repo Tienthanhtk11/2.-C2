@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace App.Common
 {
@@ -55,7 +56,6 @@ namespace App.Common
             }
             catch (Exception ex)
             {
-                throw ex;
             }
         }
 
@@ -319,13 +319,13 @@ namespace App.Common
         public string CheckMoney(SerialPort port)
         {
             //dùng command để lấy số dư tài khoản
-            //string command2 = "AT + COPS =? ";
-            //string recievedData2 = ExecCommand(port, command2, 5000, "Failed to send message"); //3 seconds
+            string recievedData = ExecCommand(port, "AT", 300, "No phone connected");
             Thread.Sleep(1000);
             string command = "AT+CUSD=1,\"*101#\",15";
-            string recievedData = ExecCommand(port, command, 5000, "Failed to send message"); //3 seconds
+            recievedData = ExecCommand(port, command, 5000, "Failed to send message"); //3 seconds
             return recievedData;
         }
+
         public string GetSimNetWork(SerialPort port)
         {
             string command2 = "AT+COPS?";
@@ -343,7 +343,8 @@ namespace App.Common
                 return "Mobifone";
             }
             else
-                return "UNKNOW";
+                return recievedData;
+            //return "UNKNOW";
         }
         //AT+CSCA="+84900000022",145
 
@@ -358,7 +359,7 @@ namespace App.Common
                 serialPort.WriteLine(@"AT+CMGS=""" + PhoneNo + @"""" + (char)(13));
                 Thread.Sleep(200);
                 serialPort.WriteLine(Message + (char)(26));
-
+                string response = serialPort.ReadExisting();
                 return true;
             }
             catch (Exception ex)
@@ -601,7 +602,6 @@ namespace App.Common
             return messages;
         }
         #endregion
-
         public void DeleteMsg(SerialPort port)
         {
             #region Execute Command

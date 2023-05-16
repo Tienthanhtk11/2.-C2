@@ -9,5 +9,6 @@
         public string date_receive  { get; set; } = "";
         public string port_name { get; set; } = "";
         public string computer_name { get; set; } = "";
+        public long? android_sms_id { get; set; } 
     }
 }

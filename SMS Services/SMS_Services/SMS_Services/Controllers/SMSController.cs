@@ -80,113 +80,113 @@ namespace SMS_Services.Controllers
             return Ok();
         }
         #endregion
-        #region Order
-        [HttpPost("order-create")]
-        public async Task<IActionResult> OrderCreate([FromBody] Order model)
-        {
-            try
-            {
-                string customer_name = username(this._httpContextAccessor);
-                long customer_id = userid(this._httpContextAccessor);
-                bool customer_active = await this._repository.Customer_Check_Active(customer_name, customer_id);
-                if (customer_active)
-                {
-                    var response = await this._repository.OrderCreate(model);
-                    return Ok(new ResponseSingleContentModel<Order>
-                    {
-                        StatusCode = 200,
-                        Message = "",
-                        Data = response
-                    });
-                }
-                else return Ok(new ResponseSingleContentModel<string>
-                {
-                    StatusCode = 500,
-                    Message = "Tài khoản không tồn tại hoặc đã bị khoá",
-                    Data = "Tài khoản không tồn tại hoặc đã bị khoá"
-                });
-            }
-            catch (Exception)
-            {
-                return this.RouteToInternalServerError();
-            }
-        }
-        [HttpPost("order-modify")]
-        public async Task<IActionResult> OrderModify([FromBody] Order model)
-        {
-            try
-            {
-                string customer_name = username(this._httpContextAccessor);
-                long customer_id = userid(this._httpContextAccessor);
-                bool customer_active = await this._repository.Customer_Check_Active(customer_name, customer_id);
-                if (customer_active)
-                {
-                    var response = await this._repository.OrderModify(model);
-                    if (response != null)
-                    {
-                        return Ok(new ResponseSingleContentModel<Order>
-                        {
-                            StatusCode = 200,
-                            Message = "",
-                            Data = response
-                        });
-                    }
-                    else return Ok(new ResponseSingleContentModel<string>
-                    {
-                        StatusCode = 500,
-                        Message = "Không tìm thấy đơn hàng hoặc đơn hàng đã được thực thi!",
-                        Data = "Không tìm thấy đơn hàng hoặc đơn hàng đã được thực thi!"
-                    });
-                }
-                else return Ok(new ResponseSingleContentModel<string>
-                {
-                    StatusCode = 500,
-                    Message = "Tài khoản không tồn tại hoặc đã bị khoá",
-                    Data = "Tài khoản không tồn tại hoặc đã bị khoá"
-                });
-            }
-            catch (Exception)
-            {
-                return this.RouteToInternalServerError();
-            }
-        }
-        [HttpGet("order-list")]
-        public async Task<IActionResult> OrderList()
-        {
-            try
-            {
-                var response = await this._repository.OrderList();
-                return Ok(new ResponseSingleContentModel<List<Order>>
-                {
-                    StatusCode = 200,
-                    Message = "",
-                    Data = response
-                });
-            }
-            catch (Exception)
-            {
-                return this.RouteToInternalServerError();
-            }
-        }
-        [HttpGet("order-detail")]
-        public async Task<IActionResult> OrderDetail(long id)
-        {
-            try
-            {
-                var response = await this._repository.OrderDetail(id);
-                return Ok(new ResponseSingleContentModel<Order>
-                {
-                    StatusCode = 200,
-                    Message = "",
-                    Data = response
-                });
-            }
-            catch (Exception)
-            {
-                return this.RouteToInternalServerError();
-            }
-        }
-        #endregion
+        //#region Order
+        //[HttpPost("order-create")]
+        //public async Task<IActionResult> OrderCreate([FromBody] Order model)
+        //{
+        //    try
+        //    {
+        //        string customer_name = username(this._httpContextAccessor);
+        //        long customer_id = userid(this._httpContextAccessor);
+        //        bool customer_active = await this._repository.Customer_Check_Active(customer_name, customer_id);
+        //        if (customer_active)
+        //        {
+        //            var response = await this._repository.OrderCreate(model);
+        //            return Ok(new ResponseSingleContentModel<Order>
+        //            {
+        //                StatusCode = 200,
+        //                Message = "",
+        //                Data = response
+        //            });
+        //        }
+        //        else return Ok(new ResponseSingleContentModel<string>
+        //        {
+        //            StatusCode = 500,
+        //            Message = "Tài khoản không tồn tại hoặc đã bị khoá",
+        //            Data = "Tài khoản không tồn tại hoặc đã bị khoá"
+        //        });
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return this.RouteToInternalServerError();
+        //    }
+        //}
+        //[HttpPost("order-modify")]
+        //public async Task<IActionResult> OrderModify([FromBody] Order model)
+        //{
+        //    try
+        //    {
+        //        string customer_name = username(this._httpContextAccessor);
+        //        long customer_id = userid(this._httpContextAccessor);
+        //        bool customer_active = await this._repository.Customer_Check_Active(customer_name, customer_id);
+        //        if (customer_active)
+        //        {
+        //            var response = await this._repository.OrderModify(model);
+        //            if (response != null)
+        //            {
+        //                return Ok(new ResponseSingleContentModel<Order>
+        //                {
+        //                    StatusCode = 200,
+        //                    Message = "",
+        //                    Data = response
+        //                });
+        //            }
+        //            else return Ok(new ResponseSingleContentModel<string>
+        //            {
+        //                StatusCode = 500,
+        //                Message = "Không tìm thấy đơn hàng hoặc đơn hàng đã được thực thi!",
+        //                Data = "Không tìm thấy đơn hàng hoặc đơn hàng đã được thực thi!"
+        //            });
+        //        }
+        //        else return Ok(new ResponseSingleContentModel<string>
+        //        {
+        //            StatusCode = 500,
+        //            Message = "Tài khoản không tồn tại hoặc đã bị khoá",
+        //            Data = "Tài khoản không tồn tại hoặc đã bị khoá"
+        //        });
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return this.RouteToInternalServerError();
+        //    }
+        //}
+        //[HttpGet("order-list")]
+        //public async Task<IActionResult> OrderList()
+        //{
+        //    try
+        //    {
+        //        var response = await this._repository.OrderList();
+        //        return Ok(new ResponseSingleContentModel<List<Order>>
+        //        {
+        //            StatusCode = 200,
+        //            Message = "",
+        //            Data = response
+        //        });
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return this.RouteToInternalServerError();
+        //    }
+        //}
+        //[HttpGet("order-detail")]
+        //public async Task<IActionResult> OrderDetail(long id)
+        //{
+        //    try
+        //    {
+        //        var response = await this._repository.OrderDetail(id);
+        //        return Ok(new ResponseSingleContentModel<Order>
+        //        {
+        //            StatusCode = 200,
+        //            Message = "",
+        //            Data = response
+        //        });
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return this.RouteToInternalServerError();
+        //    }
+        //}
+        //#endregion
 
         #region test
         [AllowAnonymous]
