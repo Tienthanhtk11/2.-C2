@@ -5,6 +5,8 @@ import useSWR from "swr";
 import { customer } from "@/services/customer";
 import { fetcher } from "@/common/const";
 import { getToken } from "@/common/function-global";
+import { EditOutlined } from "@ant-design/icons";
+import ModifyCustomerModal from "./modifyCustomerModal";
 
 interface DataType {
   name: string;
@@ -55,6 +57,17 @@ export default function Customer() {
       key: "last_active",
       dataIndex: "last_active",
     },
+    {
+      title: "Thao tác",
+      key: "action",
+      render: (_, record, index) => (
+        <Space size="middle">
+          <EditOutlined
+            onClick={() => handleOpenModifyCustomerModal(record)}
+          />
+        </Space>
+      ),
+    },
   ];
   const initFilter = {
     user_name: "",
@@ -63,6 +76,8 @@ export default function Customer() {
   const [lstTable, setListTable] = useState([]);
   const [CustomerData, setCustomerData] = useState<any>();
   const [filterTable, setfilterTable] = useState<any>(initFilter);
+  const [isVisibleCustomerModal, setVisibleCustomerModal] =
+    useState(false);
 
   const {
     data: listRes,
@@ -70,15 +85,36 @@ export default function Customer() {
     isLoading,
     mutate,
   } = useSWR([customer().customer().list(filterTable), getToken()], ([url, token]) => fetcher(url, token));
+
   useEffect(() => {
     if (listRes && !error) {
       setListTable(listRes?.data);
     }
   }, [error, listRes]);
 
+  // cập nhật
+  const handleCustomerModalModal = (res: any) => {
+    setVisibleCustomerModal(false);
+    if (res) {
+      mutate({ ...listRes.data, res });
+    }
+  };
+
+  const handleOpenModifyCustomerModal = (data: any) => {
+    setCustomerData(data);
+    setVisibleCustomerModal(true);
+  };
+
   return (
     <>
       <Table columns={columns} dataSource={lstTable ?? []} />
+      {isVisibleCustomerModal && (
+        <ModifyCustomerModal
+          show={isVisibleCustomerModal}
+          data={{ id: CustomerData.id }}
+          handleModifyCustomerModal={handleCustomerModalModal}
+        />
+      )}
     </>
   );
 }
