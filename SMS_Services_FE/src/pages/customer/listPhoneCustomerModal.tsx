@@ -1,9 +1,11 @@
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, Space, Table } from "antd";
 import { sendRequest_$POST } from "@/common/function-global";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import { user } from "@/services/user";
 import useSWRMutation from "swr/mutation";
+import { ColumnsType } from "antd/es/table";
+import { EditOutlined } from "@ant-design/icons";
 
 const { Item } = Form;
 
@@ -15,6 +17,37 @@ type Props = {
 
 const ListPhoneCustomerModal: React.FC<Props> = (props) => {
   const [form] = Form.useForm();
+
+  const columns: ColumnsType<DataType> = [
+    {
+      title: "STT",
+      render: (_, record, index) => (
+        <div className="center">{index + 1}</div>
+      ),
+    },
+    {
+      title: "Mã",
+      dataIndex: "code",
+      key: "code",
+    },
+    {
+      title: "Tên",
+      dataIndex: "name",
+      key: "name",
+    },   
+    {
+      title: "Thao tác",
+      key: "action",
+      render: (_, record, index) => (
+        <Space size="middle">
+           {/* <EditOutlined
+              onClick={() => handleOpenModifyManageClassModal(record)}
+            />      */}
+        </Space>
+      ),
+    },
+  ];
+
   const initialValuesForm = {
     is_active: true,
   };
@@ -58,7 +91,7 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
         okText="Đăng Ký"
         cancelText="Hủy"
       >
-       {/* <Table columns={columns} dataSource={lstTable ?? []} /> */}
+       <Table columns={columns} dataSource={lstTable ?? []} />
       </Modal>
     </>
   );
