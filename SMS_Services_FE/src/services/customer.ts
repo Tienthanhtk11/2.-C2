@@ -10,6 +10,9 @@ export function customer() {
         create: () => `${url}create`,
         modify: () => `${url}modify`,
         login: () => `${url}login`,
+        listphonenumber: (customer_id: number) => `${url}list-phone-number?customer_id=${customer_id}`,
+        listallphonenumber: () => `${url}list-all-phone-number`,
+        createphonenumber: () => `${url}create-phone-number`,        
       };
     },
   };

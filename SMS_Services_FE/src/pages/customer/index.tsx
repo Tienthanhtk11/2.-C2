@@ -6,7 +6,7 @@ import { customer } from "@/services/customer";
 import { fetcher } from "@/common/const";
 import { getToken } from "@/common/function-global";
 import { EditOutlined } from "@ant-design/icons";
-import ModifyCustomerModal from "./modifyCustomerModal";
+import ListPhoneCustomerModal from "./listPhoneCustomerModal";
 
 interface DataType {
   name: string;
@@ -17,7 +17,6 @@ interface DataType {
   dateAdded: Date;
   last_active: Date;
   status: string;
-
 }
 
 export default function Customer() {
@@ -76,8 +75,7 @@ export default function Customer() {
   const [lstTable, setListTable] = useState([]);
   const [CustomerData, setCustomerData] = useState<any>();
   const [filterTable, setfilterTable] = useState<any>(initFilter);
-  const [isVisibleCustomerModal, setVisibleCustomerModal] =
-    useState(false);
+  const [isVisibleListPhoneCustomerModal, setVisibleListPhoneCustomerModal] = useState(false);
 
   const {
     data: listRes,
@@ -92,9 +90,9 @@ export default function Customer() {
     }
   }, [error, listRes]);
 
-  // cập nhật
+  // danh sách tài khoản khách hàng
   const handleCustomerModalModal = (res: any) => {
-    setVisibleCustomerModal(false);
+    setVisibleListPhoneCustomerModal(false);
     if (res) {
       mutate({ ...listRes.data, res });
     }
@@ -102,17 +100,17 @@ export default function Customer() {
 
   const handleOpenModifyCustomerModal = (data: any) => {
     setCustomerData(data);
-    setVisibleCustomerModal(true);
+    setVisibleListPhoneCustomerModal(true);
   };
 
   return (
     <>
       <Table columns={columns} dataSource={lstTable ?? []} />
-      {isVisibleCustomerModal && (
-        <ModifyCustomerModal
-          show={isVisibleCustomerModal}
+      {isVisibleListPhoneCustomerModal && (
+        <ListPhoneCustomerModal
+          show={isVisibleListPhoneCustomerModal}
           data={{ id: CustomerData.id }}
-          handleModifyCustomerModal={handleCustomerModalModal}
+          handleListPhoneCustomerModalClose={handleCustomerModalModal}
         />
       )}
     </>
