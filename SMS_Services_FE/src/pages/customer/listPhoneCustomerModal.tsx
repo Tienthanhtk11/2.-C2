@@ -15,6 +15,15 @@ type Props = {
   data:any
 };
 
+interface DataType {
+  code: string;
+  id: number;
+  customer_id: number;
+  count_sms: number;
+  status: number;
+  timeSend: Date;
+} 
+
 const ListPhoneCustomerModal: React.FC<Props> = (props) => {
   const [form] = Form.useForm();
 
