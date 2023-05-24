@@ -15,7 +15,9 @@ const { Item } = Form;
 type Props = {
   show: boolean;
   handleCreatePhoneNumberModal: any;
-  data: any
+  data: any;
+  selectedRowKeys: any;
+  listPhoneAll: Array<any>;
 };
 
 interface DataType {
@@ -37,27 +39,15 @@ const CreatePhoneNumberModal: React.FC<Props> = (props) => {
       ),
     },
     {
-      title: "Mã",
-      dataIndex: "code",
-      key: "code",
+      title: "Số điện thoại",
+      dataIndex: "phone_number",
+      key: "phone_number",
     },
-    {
-      title: "Tên",
-      dataIndex: "name",
-      key: "name",
-    },    
   ];
 
-  
-  const [lstTable, setListTable] = useState([]);
-  const [selectPhoneData, setSelectPhoneData] = useState<any>();
 
-  const {
-    data: listRes,
-    error,
-    isLoading,
-    mutate,
-  } = useSWR((!!props.data.getId) ? [customer().customer().listphonenumber(props.data.getId), getToken()]: null, ([url, token]) => fetcher(url, token));  
+  const [lstTable, setListTable] = useState<Array<any>>([]);
+  const [selectPhoneData, setSelectPhoneData] = useState<any>();
 
   const {
     trigger,
@@ -65,11 +55,24 @@ const CreatePhoneNumberModal: React.FC<Props> = (props) => {
     error: createphonenumberError,
   } = useSWRMutation(customer().customer().createphonenumber, sendRequest_$POST);
 
-  const handleFormSubmit = async () => {
-    await trigger({ ...selectPhoneData });
+  const handleFormSubmit = async () => {       
+    let data = selectPhoneData.map((obj: any) => {
+      let res = {
+        id: 0,
+        is_delete: false,
+        customer_id: props.data.customer_id,
+        phone_number: obj.phone_number,
+        phone_id: obj.id,
+      }
+      return res;
+    });
+    await trigger(data);
   };
 
   useEffect(() => {
+    if (props.listPhoneAll) {
+      setListTable(props.listPhoneAll);
+    }
     if (createphonenumberData?.statusCode == statusCode.OK) {
       notificationSuccess("Thêm mới thành công");
       props.handleCreatePhoneNumberModal(createphonenumberData?.data);
@@ -77,14 +80,31 @@ const CreatePhoneNumberModal: React.FC<Props> = (props) => {
     else if (createphonenumberData?.statusCode == statusCode.Error) {
       notificationError(`${createphonenumberData?.message}`);
     }
-    if (error) {
-      notificationError(`${error}`);
+    if (createphonenumberError) {
+      notificationError(`${createphonenumberError}`);
     }
   }, [createphonenumberData, createphonenumberError]);
 
   const Cancel = () => {
     props.handleCreatePhoneNumberModal();
   }
+
+  const rowSelection = {
+
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+      setSelectPhoneData(selectedRows)
+    },
+    onselect: (record: any, selected: boolean, selectedRows: any, nativeEvent: Event) => {
+      // console.log(record);
+      // console.log(selected);
+      // console.log(selectedRows);
+      // console.log(nativeEvent);
+    },
+    getCheckboxProps: (record: DataType) => ({
+      // disabled: record.username === 'Disabled User', // Column configuration not to be checked
+      // name: record.username,
+    }),
+  };
 
   return (
     <>
@@ -100,7 +120,11 @@ const CreatePhoneNumberModal: React.FC<Props> = (props) => {
         okText="Xác nhận"
         cancelText="Thoát"
       >
-        <Table columns={columns} dataSource={lstTable ?? []} />
+        <Table columns={columns} dataSource={lstTable ?? []} rowSelection={{
+          defaultSelectedRowKeys: props.selectedRowKeys,
+          type: 'checkbox',
+          ...rowSelection
+        }} />
       </Modal>
     </>
   );

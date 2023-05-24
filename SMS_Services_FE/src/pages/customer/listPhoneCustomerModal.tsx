@@ -12,7 +12,7 @@ import { customer } from "@/services/customer";
 import CreatePhoneNumberModal from "./createPhoneNumberModal";
 import useSWR from "swr";
 
-type Props = {  
+type Props = {
   show: boolean;
   handleListPhoneCustomerModalClose: any;
   data: any
@@ -37,51 +37,55 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
       ),
     },
     {
-      title: "Mã",
-      dataIndex: "code",
-      key: "code",
-    },
-    {
-      title: "Tên",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Thao tác",
-      key: "action",
-      render: (_, record, index) => (
-        <Space size="middle">
-          {/* <EditOutlined
-              onClick={() => handleOpenModifyManageClassModal(record)}
-            />      */}
-        </Space>
-      ),
-    },
+      title: "Số điện thoại",
+      dataIndex: "phone_number",
+      key: "phone_number",
+    },    
   ];
 
   const [lstTable, setListTable] = useState([]);
-  const [phoneData, setPhoneData] = useState<any>();
+  const [CustomerData, setCustomerData] = useState<any>();
   const [isVisibleCreatePhoneNumberModal, setVisibleCreatePhoneNumberModal] = useState(false);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<any>()
 
   const {
     data: listRes,
     error,
     isLoading,
     mutate,
-  } = useSWR((props.show) ? customer().customer().listphonenumber(props.data.getId): null, sendRequest_$GET);  
+  } = useSWR([(props.data?.id) || (isVisibleCreatePhoneNumberModal) ? customer().customer().listphonenumber(props.data.id) : '', getToken()], ([url, token]) => sendRequest_$GET(url, token));
+
+  const {
+    data: listPhoneAll,
+    error: errorPhoneAll,
+  } = useSWR([(isVisibleCreatePhoneNumberModal) ? customer().customer().listallphonenumber() : '', getToken()], ([url, token]) => sendRequest_$GET(url, token));
 
   useEffect(() => {
     if (listRes && !error) {
       listRes.data?.map((obj: any, index: number) => obj.key = index + 1);
       setListTable(listRes?.data);
     }
-  }, [error, listRes]);
+    if (listPhoneAll && !errorPhoneAll) {
+      listPhoneAll?.data.map((obj: any, index: number) => obj.key = index + 1);
+      if (!!lstTable) {
+        let checked:any = [];
+        let lstTable_copy = lstTable;
+        lstTable_copy.forEach((obj: any) => {
+          listPhoneAll?.data.forEach((element: any) => {
+            element.id = obj.phone_id && checked.push(element.key)
+          });
+        });
+        setSelectedRowKeys(checked)
+      }
+      // setSelectedRowKeys(listPhoneAll.data?.find((item: any) => item.id == manageClassData.teacher_id).key)
+    }
+  }, [error, listRes, props, listPhoneAll, errorPhoneAll]);
 
   const rowSelection = {
 
     onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
 
-      setPhoneData(selectedRows[0])
+      setCustomerData(selectedRows[0])
     },
     onselect: (record: any, selected: boolean, selectedRows: any, nativeEvent: Event) => {
       // console.log(record);
@@ -98,14 +102,10 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
   // thêm
   const handleCreatePhoneNumberModalClose = (res: any) => {
     setVisibleCreatePhoneNumberModal(false);
-    if (res) {
-      mutate({ ...listRes?.data?.list, res });
-    }
   };
 
   const handleOpenCreatePhoneNumberModal = () => {
     setVisibleCreatePhoneNumberModal(true);
-    setPhoneData
   };
 
   return (
@@ -130,16 +130,15 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
         >
           Thêm mới
         </Button>
-        <Table columns={columns} dataSource={lstTable ?? []} rowSelection={{
-          type: 'radio',
-          ...rowSelection
-        }} />
+        <Table columns={columns} dataSource={lstTable ?? []} />
       </Modal>
       {isVisibleCreatePhoneNumberModal && (
         <CreatePhoneNumberModal
           show={isVisibleCreatePhoneNumberModal}
-          data={{ id: phoneData.id }}
+          data={{ customer_id: props.data?.id }}
           handleCreatePhoneNumberModal={handleCreatePhoneNumberModalClose}
+          selectedRowKeys={selectedRowKeys}
+          listPhoneAll={listPhoneAll?.data}
         />
       )}
     </>
