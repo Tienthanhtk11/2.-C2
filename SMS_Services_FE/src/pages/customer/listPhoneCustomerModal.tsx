@@ -40,7 +40,7 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
       title: "Số điện thoại",
       dataIndex: "phone_number",
       key: "phone_number",
-    },    
+    },
   ];
 
   const [lstTable, setListTable] = useState([]);
@@ -58,7 +58,7 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
   const {
     data: listPhoneAll,
     error: errorPhoneAll,
-  } = useSWR([(isVisibleCreatePhoneNumberModal) ? customer().customer().listallphonenumber() : '', getToken()], ([url, token]) => sendRequest_$GET(url, token));
+  } = useSWR([(!!listRes) ? customer().customer().listallphonenumber() : '', getToken()], ([url, token]) => sendRequest_$GET(url, token));
 
   useEffect(() => {
     if (listRes && !error) {
@@ -68,14 +68,18 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
     if (listPhoneAll && !errorPhoneAll) {
       listPhoneAll?.data.map((obj: any, index: number) => obj.key = index + 1);
       if (!!lstTable) {
-        let checked:any = [];
+        console.log("vào");
+        let checked: any = [];
         let lstTable_copy = lstTable;
+        // console.log('lstTable_copy :', lstTable_copy);
+        // console.log('listPhoneAll :', listPhoneAll.data);
+        // debugger
         lstTable_copy.forEach((obj: any) => {
-          listPhoneAll?.data.forEach((element: any) => {
-            element.id = obj.phone_id && checked.push(element.key)
+          listPhoneAll?.data.forEach((element: any) => {    
+            element.id == obj.phone_id && checked.push(element.key)
           });
         });
-        setSelectedRowKeys(checked)
+        setSelectedRowKeys(checked);
       }
       // setSelectedRowKeys(listPhoneAll.data?.find((item: any) => item.id == manageClassData.teacher_id).key)
     }
@@ -102,6 +106,9 @@ const ListPhoneCustomerModal: React.FC<Props> = (props) => {
   // thêm
   const handleCreatePhoneNumberModalClose = (res: any) => {
     setVisibleCreatePhoneNumberModal(false);
+    if (res) {
+      mutate({ ...listRes.data, res });
+    }
   };
 
   const handleOpenCreatePhoneNumberModal = () => {
