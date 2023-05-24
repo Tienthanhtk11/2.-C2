@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.Entity.Migrations;
 using System.IO.Ports;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -269,6 +270,28 @@ namespace App
         {
             FormRequestSMS formRequest = new FormRequestSMS(customer_id);
             formRequest.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < 100; i++)
+            {
+                try
+                {
+                    SerialPort serialPort = new SerialPort();
+                    Console.WriteLine("COM" + i);
+                    serialPort = extractSMS.OpenPort("COM" + i, Convert.ToInt32(115200), Convert.ToInt32(8), Convert.ToInt32(100), Convert.ToInt32(100));
+                    if (serialPort!=null)
+                    {
+                        MessageBox.Show("COM" + i);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
         }
     }
 }

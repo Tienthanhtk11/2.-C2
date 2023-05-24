@@ -24,6 +24,9 @@ namespace SMS_Services.Repository
         Task<Config_Port> Config_Port_Create(Config_Port model);
         Task<Config_Port> Config_Port_Modify(Config_Port model);
         Task<List<Config_Port>> Config_Port_List(long customer_id);
+        Task<List<Customer_Config_Phone_Number>> Customer_Config_Phone_Number_Create(List<Customer_Config_Phone_Number> model);
+        Task<List<Customer_Config_Phone_Number>> Get_Customer_Config_Phone_Number(long customer_id);
+        Task<List<Phone>> Get_List_Phone_Number();
         #endregion
     }
 }

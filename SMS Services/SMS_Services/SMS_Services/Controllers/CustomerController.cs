@@ -189,14 +189,14 @@ namespace SMS_Services.Controllers
             }
         }
 
-        //[AllowAnonymous]
-        //[HttpGet("ping")]
-        //public async Task<IActionResult> CustomerPing(long customer_id)
-        //{
-        //    _repository.CustomerPing(customer_id);
-        //    return Ok();
+        [AllowAnonymous]
+        [HttpGet("ping")]
+        public async Task<IActionResult> CustomerPing(long customer_id)
+        {
+            _repository.CustomerPing(customer_id);
+            return Ok();
 
-        //}
+        }
         [AllowAnonymous]
         [HttpGet("list-config-port")]
         public async Task<IActionResult> Config_Port_List(long customer_id)
@@ -209,6 +209,82 @@ namespace SMS_Services.Controllers
                 Data = response
             });
         }
+        [AllowAnonymous]
+        [HttpGet("list-phone-number")]
+        public async Task<IActionResult> Get_Customer_Config_Phone_Number(long customer_id)
+        {
+            try
+            {
+
+                var response = await _repository.Get_Customer_Config_Phone_Number(customer_id);
+                return Ok(new ResponseSingleContentModel<List<Customer_Config_Phone_Number>>
+                {
+                    StatusCode = 200,
+                    Message = "Success",
+                    Data = response
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseSingleContentModel<string>
+                {
+                    StatusCode = 500,
+                    Message = "Có lỗi xảy ra trong quá trình xử lý",
+                    Data = string.Empty
+                });
+            }
+        }
+        [AllowAnonymous]
+        [HttpGet("list-all-phone-number")]
+        public async Task<IActionResult> Get_List_Phone_Number()
+        {
+            try
+            {
+
+                var response = await _repository.Get_List_Phone_Number();
+                return Ok(new ResponseSingleContentModel<List<Phone>>
+                {
+                    StatusCode = 200,
+                    Message = "Success",
+                    Data = response
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseSingleContentModel<string>
+                {
+                    StatusCode = 500,
+                    Message = "Có lỗi xảy ra trong quá trình xử lý",
+                    Data = string.Empty
+                });
+            }
+        }
+        [AllowAnonymous]
+        [HttpPost("create-phone-number")]
+        public async Task<IActionResult> Customer_Config_Phone_Number_Create(List<Customer_Config_Phone_Number> model)
+        {
+            try
+            {
+                var response = await _repository.Customer_Config_Phone_Number_Create(model);
+                return Ok(new ResponseSingleContentModel<List<Customer_Config_Phone_Number>>
+                {
+                    StatusCode = 200,
+                    Message = "Success",
+                    Data = response
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new ResponseSingleContentModel<string>
+                {
+                    StatusCode = 500,
+                    Message = "Có lỗi xảy ra trong quá trình xử lý",
+                    Data = string.Empty
+                });
+            }
+        }
+
+
         [AllowAnonymous]
         [HttpPost("config-port-create")]
         public async Task<IActionResult> Config_Port_Create([FromBody] Config_Port model)

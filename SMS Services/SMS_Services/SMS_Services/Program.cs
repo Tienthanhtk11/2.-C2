@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddHostedService<SendSMS_Cronjob_Services>();
 //builder.Services.AddHostedService<ReadSMS_Cronjob_Services>();
-//builder.Services.AddHostedService<ReadSMS_From_Android>();
+builder.Services.AddHostedService<ReadSMS_From_Android>();
 
 string issuer = builder.Configuration["TokenSettings:Issuer"].ToString();
 string audience = builder.Configuration["TokenSettings:Audience"].ToString();

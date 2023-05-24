@@ -185,11 +185,24 @@ namespace SMS_Services.Repository
         {
             return _context.Config_Port.Where(x => x.Customer_Id == customer_id).ToList();
         }
-        public async Task<Customer_Config_Phone_Number> Customer_Config_Phone_Number_Create (Customer_Config_Phone_Number model)
+        public async Task<List<Customer_Config_Phone_Number>> Customer_Config_Phone_Number_Create (List<Customer_Config_Phone_Number> model)
         {
-            _context.Customer_Config_Phone_Number.Add(model);
+           var old_data = _context.Customer_Config_Phone_Number.Where(x => !x.is_delete && x.customer_id == model[0].customer_id).ToList();
+            if (old_data!=null && old_data.Count()>0)
+            {
+                _context.Customer_Config_Phone_Number.RemoveRange(old_data);
+            }
+            _context.Customer_Config_Phone_Number.AddRange(model);
             _context.SaveChanges();
             return model;   
+        }
+        public async Task<List<Customer_Config_Phone_Number>> Get_Customer_Config_Phone_Number(long customer_id)
+        {
+            return _context.Customer_Config_Phone_Number.Where(x => !x.is_delete && x.customer_id == customer_id).ToList();
+        }
+        public async Task<List<Phone>> Get_List_Phone_Number()
+        {
+            return _context.Phone.Where(x => !x.is_delete ).ToList();
         }
 
         #endregion
