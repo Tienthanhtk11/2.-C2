@@ -116,10 +116,12 @@ namespace App
                             var sms = response_content.Data;
                             if (sms != null)
                             {
-                                Send_SMS_History sms_sent = new Send_SMS_History();
-                                sms_sent.phone_receive = sms.phone_receive;
-                                sms_sent.message = sms.message;
-                                sms_sent.dateAdded = DateTime.Now;
+                                Send_SMS_History sms_sent = new Send_SMS_History
+                                {
+                                    phone_receive = sms.phone_receive,
+                                    message = sms.message,
+                                    dateAdded = DateTime.Now
+                                };
                                 bool smsSent = extractSMS.sendMsg2(serialPort, sms.phone_receive, sms.message, 500);
                                 Config_Port port = list_port.FirstOrDefault(x => x.Port_Name == str.ToString());
                                 if (port != null)
@@ -131,6 +133,7 @@ namespace App
                                 else
                                     sms_sent.system_response = "Gửi thất bại";
                                 list_message_sent.Add(sms_sent);
+                                Thread.Sleep(30000);
                             }
                         }
                         else
@@ -272,26 +275,5 @@ namespace App
             formRequest.ShowDialog();
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            for (int i = 1; i < 100; i++)
-            {
-                try
-                {
-                    SerialPort serialPort = new SerialPort();
-                    Console.WriteLine("COM" + i);
-                    serialPort = extractSMS.OpenPort("COM" + i, Convert.ToInt32(115200), Convert.ToInt32(8), Convert.ToInt32(100), Convert.ToInt32(100));
-                    if (serialPort!=null)
-                    {
-                        MessageBox.Show("COM" + i);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
-            }
-        }
     }
 }
